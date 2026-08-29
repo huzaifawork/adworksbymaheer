@@ -13,8 +13,8 @@ export default {
         "red-glow": "rgba(230, 0, 0, 0.35)",
       },
       fontFamily: {
-        heading: ["Syne", "sans-serif"],
-        body: ["Plus Jakarta Sans", "sans-serif"],
+        heading: ["Manrope", "sans-serif"],
+        body: ["Inter", "sans-serif"],
       },
     },
   },
