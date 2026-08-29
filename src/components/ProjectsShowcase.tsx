@@ -57,14 +57,14 @@ export const ProjectsShowcase: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project) => (
             <div key={project.name} className="card-base overflow-hidden group">
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative h-64 sm:h-72 overflow-hidden bg-black/40 flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={`${project.name} signage project by Adworks by Maheer`}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent"></div>
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <div className="flex items-center gap-1.5 text-[10px] font-bold text-red-400 uppercase tracking-wider mb-1">
                     <Lightbulb className="w-3 h-3" />

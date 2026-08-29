@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-300">
+          <nav className="hidden xl:flex items-center gap-5 text-sm font-medium text-zinc-300 whitespace-nowrap">
             <a href="#about" className="hover:text-red-400 transition-colors">About Us</a>
             <a href="#services" className="hover:text-red-400 transition-colors">Services</a>
             <a href="#hoardings" className="hover:text-red-400 transition-colors flex items-center gap-1">
@@ -49,31 +49,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
           </nav>
 
           {/* Action Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            <a 
+          <div className="hidden xl:flex items-center gap-3 shrink-0">
+            <a
               href="https://wa.me/923177272777?text=Hi%20Adworks%20Team,%20I%20would%20like%20to%20discuss%20marketing%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-2 rounded-lg border border-white/10 transition"
+              className="flex items-center gap-1.5 text-xs font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-2 rounded-lg border border-white/10 transition whitespace-nowrap"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
               <span>+92 317 7272777</span>
             </a>
 
             <button
               onClick={onOpenConsultationModal}
-              className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-md shadow-red-950/50"
+              className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-md shadow-red-950/50 whitespace-nowrap"
             >
               <span>Book Strategy Call</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </button>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile/Tablet Hamburger Toggle */}
+          <div className="xl:hidden flex items-center gap-2">
             <button
               onClick={onOpenConsultationModal}
-              className="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-md md:hidden"
+              className="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-md whitespace-nowrap"
             >
               Strategy Call
             </button>
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#09080A] border-b border-white/10 px-6 py-5 mt-0 animate-fadeIn">
+        <div className="xl:hidden bg-[#09080A] border-b border-white/10 px-6 py-5 mt-0 animate-fadeIn">
           <div className="flex flex-col gap-3 font-medium text-sm text-zinc-200">
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">About Us</a>
             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Services Ecosystem</a>
