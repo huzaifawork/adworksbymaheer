@@ -41,6 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
               <span>150+ Hoardings</span>
               <span className="bg-red-600/20 text-red-400 text-[9px] font-bold px-1.5 py-0.5 rounded">OOH</span>
             </a>
+            <a href="#projects" className="hover:text-red-400 transition-colors">Projects</a>
             <a href="#process" className="hover:text-red-400 transition-colors">Process</a>
             <a href="#model" className="hover:text-red-400 transition-colors">Model</a>
             <a href="#industries" className="hover:text-red-400 transition-colors">Industries</a>
@@ -98,6 +99,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
               <span>150+ Outdoor Hoardings</span>
               <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">OOH</span>
             </a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Featured Projects</a>
             <a href="#process" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">How We Work</a>
             <a href="#model" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">One-Stop Model</a>
             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Industries Served</a>

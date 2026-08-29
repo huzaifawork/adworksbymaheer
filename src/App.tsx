@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { AboutDirector } from './components/AboutDirector';
 import { ServiceEcosystem } from './components/ServiceEcosystem';
 import { HoardingsShowcase } from './components/HoardingsShowcase';
+import { ProjectsShowcase } from './components/ProjectsShowcase';
 import { WhatWeDoProcess } from './components/WhatWeDoProcess';
 import { OneStopModel } from './components/OneStopModel';
 import { IndustriesServed } from './components/IndustriesServed';
@@ -33,6 +34,9 @@ export function App() {
 
         {/* 150+ Outdoor Hoardings Asset Feature */}
         <HoardingsShowcase onOpenModal={() => setIsModalOpen(true)} />
+
+        {/* Featured Signage & Branding Projects */}
+        <ProjectsShowcase />
 
         {/* 6-Step Growth Work Process */}
         <WhatWeDoProcess />
