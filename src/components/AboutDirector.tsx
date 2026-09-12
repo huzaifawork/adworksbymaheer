@@ -3,7 +3,7 @@ import { UserCheck, Award, CheckCircle2, Quote } from 'lucide-react';
 
 export const AboutDirector: React.FC = () => {
   return (
-    <section id="about" className="py-16 sm:py-20 relative bg-[#09080A] border-b border-white/5">
+    <section id="about" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -25,7 +25,7 @@ export const AboutDirector: React.FC = () => {
           
           {/* Left Column: Director Photo */}
           <div className="lg:col-span-5 max-w-sm mx-auto lg:max-w-none w-full">
-            <div className="card-base p-2.5 bg-[#0F0C12] border-red-500/20">
+            <div className="card-base p-2.5 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/20">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-900">
                 <img
                   src="/maheer_director.png"

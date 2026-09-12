@@ -36,7 +36,7 @@ const projects = [
 
 export const ProjectsShowcase: React.FC = () => {
   return (
-    <section id="projects" className="py-16 sm:py-20 bg-[#09080A] border-b border-white/5">
+    <section id="projects" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

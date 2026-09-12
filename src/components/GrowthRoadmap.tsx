@@ -38,7 +38,7 @@ export const GrowthRoadmap: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-[#09080A] border-b border-white/5">
+    <section className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-10">
@@ -60,7 +60,7 @@ export const GrowthRoadmap: React.FC = () => {
             <div 
               key={idx}
               className={`card-base p-4 relative ${
-                p.active ? 'border-red-500/40 bg-[#0F0C12]' : 'bg-[#121015] opacity-75'
+                p.active ? 'border-red-500/40 bg-[#0F0C12]/85 backdrop-blur-sm' : 'bg-[#121015]/75 opacity-75'
               }`}
             >
               <div className="flex items-center justify-between mb-3">

@@ -3,7 +3,7 @@ import { XCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export const OneStopModel: React.FC = () => {
   return (
-    <section id="model" className="py-16 sm:py-20 bg-[#09080A] border-b border-white/5">
+    <section id="model" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -59,7 +59,7 @@ export const OneStopModel: React.FC = () => {
           </div>
 
           {/* Adworks Integrated Model */}
-          <div className="card-base p-6 bg-[#0F0C12] border-red-500/40">
+          <div className="card-base p-6 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/40">
             <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-red-500/30">
               <CheckCircle2 className="w-5 h-5 text-red-500" />
               <div>

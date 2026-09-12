@@ -23,7 +23,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-[#09080A] border-b border-white/5 relative">
+    <section id="contact" className="py-16 sm:py-20 section-veil-strong relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -46,7 +46,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
           {/* Left Column: Direct Info */}
           <div className="lg:col-span-5 space-y-4">
             
-            <div className="card-base p-6 bg-[#0F0C12] border-red-500/20">
+            <div className="card-base p-6 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/20">
               <h3 className="font-heading font-bold text-lg text-white mb-1">
                 Adworks Media & Growth Desk
               </h3>
@@ -146,7 +146,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
 
           {/* Right Column: Inquiry Form without Price/Budget dropdown */}
           <div className="lg:col-span-7">
-            <div className="card-base p-6 sm:p-8 bg-[#0F0C12] border-red-500/20">
+            <div className="card-base p-6 sm:p-8 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/20">
               
               {!submitted ? (
                 <div>

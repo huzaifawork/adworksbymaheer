@@ -34,3 +34,6 @@ Thumbs.db
 # Source material (not needed to build the site)
 *.pptx
 ppt/
+
+# Original design source kept locally, not served or deployed
+design-assets/

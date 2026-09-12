@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { BrandLogoDock, HEADER_SLOT_ID } from './BrandLogoDock';
+import { HoardingMenu } from './HoardingMenu';
 
-interface NavbarProps {
-  onOpenConsultationModal: () => void;
-}
+const WHATSAPP_NUMBER = '923177272777';
+const WHATSAPP_DISPLAY = '+92 317 7272777';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  'Hi Adworks Team, I would like to discuss marketing services.'
+)}`;
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
+/* lucide-react ships no brand glyphs, so the WhatsApp mark is inlined */
+const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.966 1.164-.198.199-.396.223-.693.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.116-.198.058-.371-.03-.52-.086-.148-.663-1.6-.909-2.19-.239-.575-.482-.497-.66-.505-.172-.008-.37-.01-.568-.01a1.09 1.09 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z" />
+    <path d="M20.52 3.449A11.9 11.9 0 0 0 12.05 0C5.495 0 .16 5.334.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.304-1.654a11.88 11.88 0 0 0 5.741 1.463h.005c6.554 0 11.89-5.335 11.892-11.893a11.82 11.82 0 0 0-3.422-8.467zM12.05 21.786h-.004a9.87 9.87 0 0 1-5.032-1.378l-.361-.214-3.741.981.999-3.648-.235-.374a9.86 9.86 0 0 1-1.511-5.26c.002-5.45 4.437-9.884 9.889-9.884a9.82 9.82 0 0 1 6.988 2.898 9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.438 9.885-9.885 9.885z" />
+  </svg>
+);
+
+export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -23,15 +35,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
-          
-          {/* Brand Logo - Trimmed asset scales the mark up without changing header height */}
-          <a href="#" className="flex items-center h-full shrink-0">
-            <img 
-              src="/whitelogo-trimmed.png" 
-              alt="Adworks by Maheer Logo" 
-              className="h-9 sm:h-11 lg:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
-            />
-          </a>
+
+          {/* Brand slot - reserves the logo's exact box. The visible mark is
+              rendered by <BrandLogoDock/>, which docks it here on scroll. */}
+          <div
+            id={HEADER_SLOT_ID}
+            aria-hidden="true"
+            className="h-9 sm:h-11 lg:h-12 aspect-[313/76] shrink-0"
+          />
 
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-5 text-sm font-medium text-zinc-300 whitespace-nowrap">
@@ -48,35 +59,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
             <a href="#contact" className="hover:text-red-400 transition-colors">Contact</a>
           </nav>
 
-          {/* Action Buttons */}
+          {/* Action Buttons - single WhatsApp CTA carrying the number */}
           <div className="hidden xl:flex items-center gap-3 shrink-0">
             <a
-              href="https://wa.me/923177272777?text=Hi%20Adworks%20Team,%20I%20would%20like%20to%20discuss%20marketing%20services."
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-2 rounded-lg border border-white/10 transition whitespace-nowrap"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1FBE5A] text-[#062611] text-xs font-bold px-4 py-2 rounded-lg transition shadow-md shadow-emerald-950/40 whitespace-nowrap"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-              <span>+92 317 7272777</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+              <span>WhatsApp Us</span>
+              <span className="w-px h-3 bg-[#062611]/25" aria-hidden="true"></span>
+              <span className="font-semibold tracking-tight">{WHATSAPP_DISPLAY}</span>
             </a>
-
-            <button
-              onClick={onOpenConsultationModal}
-              className="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-md shadow-red-950/50 whitespace-nowrap"
-            >
-              <span>Book Strategy Call</span>
-              <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-            </button>
           </div>
 
           {/* Mobile/Tablet Hamburger Toggle */}
           <div className="xl:hidden flex items-center gap-2">
-            <button
-              onClick={onOpenConsultationModal}
-              className="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-md whitespace-nowrap"
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Chat with Adworks on WhatsApp at ${WHATSAPP_DISPLAY}`}
+              className="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1FBE5A] text-[#062611] text-xs font-bold px-3 py-1.5 rounded-md transition whitespace-nowrap"
             >
-              Strategy Call
-            </button>
+              <WhatsAppIcon className="w-4 h-4 shrink-0" />
+              <span className="hidden sm:inline">WhatsApp</span>
+            </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-zinc-300 hover:text-white p-1.5"
@@ -89,46 +98,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultationModal }) => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-[#09080A] border-b border-white/10 px-6 py-5 mt-0 animate-fadeIn">
-          <div className="flex flex-col gap-3 font-medium text-sm text-zinc-200">
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">About Us</a>
-            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Services Ecosystem</a>
-            <a href="#hoardings" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5 flex items-center justify-between">
-              <span>150+ Outdoor Hoardings</span>
-              <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">OOH</span>
-            </a>
-            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Featured Projects</a>
-            <a href="#process" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">How We Work</a>
-            <a href="#model" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">One-Stop Model</a>
-            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Industries Served</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="py-1.5 border-b border-white/5">Contact Us</a>
-            
-            <div className="pt-3 flex flex-col gap-2">
-              <a 
-                href="https://wa.me/923177272777?text=Hi%20Adworks%20Team,%20I%20would%20like%20to%20discuss%20marketing%20services."
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-lg text-xs font-semibold transition"
-              >
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span>WhatsApp +92 317 7272777</span>
-              </a>
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenConsultationModal();
-                }}
-                className="w-full bg-red-600 text-white py-2.5 rounded-lg text-xs font-bold"
-              >
-                Book Strategy Call
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Single brand mark: large in the hero, docked here once scrolled */}
+      <BrandLogoDock />
+
+      {/* Mobile nav: trivision hoarding panels */}
+      <HoardingMenu
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        whatsappUrl={WHATSAPP_URL}
+        whatsappDisplay={WHATSAPP_DISPLAY}
+        icon={<WhatsAppIcon className="w-4 h-4" />}
+      />
+
     </header>
   );
 };

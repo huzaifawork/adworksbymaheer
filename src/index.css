@@ -94,3 +94,239 @@ h1, h2, h3, h4, h5, h6 {
       linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
 }
+
+/* ============================================================
+   Sticky Site Backdrop (public/bgimage/bgimage.png)
+   Rendered once by <SiteBackground /> behind the entire page.
+   The artwork stays crisp and clearly visible; per-section veils
+   (below) carry the text contrast instead of hiding the image.
+   ============================================================ */
+
+.site-bg-image {
+  position: absolute;
+  /* Small bleed so the edges never show through the transform */
+  inset: -2vmax;
+  /* WebP first (0.24 MB vs 2.16 MB); the plain url() above it is the
+     fallback for anything without image-set() support. */
+  background-image: url('/bgimage/bgimage.png');
+  background-image: image-set(
+    url('/bgimage/bgimage.webp') type('image/webp'),
+    url('/bgimage/bgimage.png') type('image/png')
+  );
+  background-size: cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  /* Crisp: no blur. A small brightness/saturation lift keeps the
+     mountains and sunset reading through the veils above. */
+  filter: saturate(1.14) brightness(1.08) contrast(1.02);
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.site-bg-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(9, 8, 10, 0.26) 0%,
+      rgba(9, 8, 10, 0.14) 32%,
+      rgba(9, 8, 10, 0.20) 68%,
+      rgba(9, 8, 10, 0.46) 100%
+    );
+}
+
+.site-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      55% 40% at 50% 36%,
+      rgba(230, 0, 0, 0.11) 0%,
+      rgba(230, 0, 0, 0.03) 50%,
+      transparent 78%
+    ),
+    radial-gradient(
+      130% 100% at 50% 50%,
+      transparent 45%,
+      rgba(5, 4, 5, 0.34) 88%,
+      rgba(5, 4, 5, 0.52) 100%
+    );
+}
+
+/* Every section rides the same shared backdrop. One consistent veil
+   value across content sections avoids visible banding on scroll. */
+@layer utilities {
+  .section-veil {
+    background-color: rgba(9, 8, 10, 0.58);
+    backdrop-filter: blur(1px);
+  }
+
+  /* Form- and detail-heavy sections get a little more cover */
+  .section-veil-strong {
+    background-color: rgba(9, 8, 10, 0.70);
+    backdrop-filter: blur(2px);
+  }
+
+  /* Hero: the reveal moment. Only a light wash, so the billboard and
+     mountains stay bright at the edges; the spotlight below carries
+     contrast for the copy itself. Fades into the standard section veil
+     so the first transition is seamless. */
+  .section-veil-hero {
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 8, 10, 0.34) 0%,
+      rgba(9, 8, 10, 0.16) 38%,
+      rgba(9, 8, 10, 0.26) 78%,
+      rgba(9, 8, 10, 0.58) 100%
+    );
+  }
+
+  /* Pool of darkness behind the hero copy: enough to hold the headline
+     at full contrast without dimming the whole frame. */
+  .hero-spotlight {
+    background:
+      radial-gradient(
+        60% 55% at 50% 44%,
+        rgba(9, 8, 10, 0.62) 0%,
+        rgba(9, 8, 10, 0.46) 40%,
+        rgba(9, 8, 10, 0.20) 70%,
+        transparent 90%
+      );
+  }
+
+  /* Hairline light-catch on the hero's lower edge */
+  .hero-edge-glow {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(230, 0, 0, 0.35) 30%,
+      rgba(255, 120, 120, 0.55) 50%,
+      rgba(230, 0, 0, 0.35) 70%,
+      transparent 100%
+    );
+  }
+}
+
+/* Small screens: the fixed bitmap is cropped hard at phone width and
+   blurring it is expensive, so lean on a touch more veil instead. */
+@media (max-width: 640px) {
+  .site-bg-image {
+    filter: saturate(1.12) brightness(1.06);
+    opacity: 0.95;
+  }
+  .section-veil {
+    background-color: rgba(9, 8, 10, 0.68);
+  }
+  .section-veil-strong {
+    background-color: rgba(9, 8, 10, 0.78);
+  }
+  .section-veil,
+  .section-veil-strong {
+    backdrop-filter: none;
+  }
+}
+
+/* Portrait screens: the 16:9 artwork would be cropped to a narrow sliver and
+   magnified ~2.5x by background-size:cover. Swap in a 9:16 crop composed
+   around the billboard instead. Keyed on aspect ratio, not width, because the
+   aspect mismatch is the actual cause - this also covers portrait tablets and
+   correctly reverts when a phone is turned landscape. */
+@media (max-aspect-ratio: 3/4) {
+  .site-bg-image {
+    background-image: url('/bgimage/bgimage-portrait.jpg');
+    background-image: image-set(
+      url('/bgimage/bgimage-portrait.webp') type('image/webp'),
+      url('/bgimage/bgimage-portrait.jpg') type('image/jpeg')
+    );
+    /* Anchors the billboard in the upper viewport, behind the hero */
+    background-position: center top;
+    inset: 0;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bg-image {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Mobile "hoarding" menu
+   Panels flip down like a trivision billboard turning over -
+   the rotating-prism mechanism used in real outdoor media.
+   ============================================================ */
+
+@keyframes menuVeilIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Mechanical flip with a small overshoot and settle */
+@keyframes hoardingFlipIn {
+  0%   { opacity: 0; transform: rotateX(-90deg); }
+  55%  { opacity: 1; transform: rotateX(7deg); }
+  78%  { transform: rotateX(-2.5deg); }
+  100% { opacity: 1; transform: rotateX(0deg); }
+}
+
+/* Gantry lamps striking, with the stutter of a real discharge lamp */
+@keyframes lampStrike {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.9; }
+  45%  { opacity: 0.15; }
+  60%  { opacity: 0.75; }
+  100% { opacity: 1; }
+}
+
+@keyframes plateRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.menu-veil {
+  animation: menuVeilIn 260ms ease-out both;
+}
+
+/* Parent supplies the depth the flip is read in */
+.hoarding-stack {
+  perspective: 900px;
+  perspective-origin: 50% 0%;
+}
+
+.hoarding-panel {
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation: hoardingFlipIn 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lamp-glow {
+  animation: lampStrike 620ms ease-out both;
+}
+
+.menu-plate {
+  animation: plateRise 420ms ease-out both;
+}
+
+/* Warm spill from the gantry lamps across the top of each panel */
+.panel-spill {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 176, 84, 0.20) 0%,
+    rgba(255, 140, 60, 0.07) 38%,
+    transparent 78%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hoarding-panel,
+  .lamp-glow,
+  .menu-plate,
+  .menu-veil {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

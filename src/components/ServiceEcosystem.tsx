@@ -102,7 +102,7 @@ export const ServiceEcosystem: React.FC = () => {
   const activeDivision = divisions.find(d => d.id === activeTab) || divisions[0];
 
   return (
-    <section id="services" className="py-16 sm:py-20 bg-[#09080A] border-b border-white/5">
+    <section id="services" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -130,7 +130,7 @@ export const ServiceEcosystem: React.FC = () => {
                 className={`p-4 rounded-xl text-left transition border ${
                   isActive
                     ? 'bg-red-950/40 border-red-500 text-white'
-                    : 'bg-[#121015] border-white/10 text-zinc-400 hover:text-white'
+                    : 'bg-[#121015]/75 border-white/10 text-zinc-400 hover:text-white'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -149,7 +149,7 @@ export const ServiceEcosystem: React.FC = () => {
         </div>
 
         {/* Selected Division Details */}
-        <div className="card-base p-6 sm:p-8 bg-[#0F0C12] border-red-500/30">
+        <div className="card-base p-6 sm:p-8 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/30">
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>

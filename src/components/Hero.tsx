@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Flame, ShieldCheck, Sparkles, Building2, TrendingUp, Compass } from 'lucide-react';
+import { HERO_SLOT_ID } from './BrandLogoDock';
 
 interface HeroProps {
   onOpenModal: () => void;
@@ -7,19 +8,35 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
   return (
-    <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 flex flex-col justify-center items-center overflow-hidden bg-grid-pattern border-b border-white/5">
+    <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 flex flex-col justify-center items-center overflow-hidden section-veil-hero border-b border-white/5">
       
-      {/* Background Subtle Red Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-red-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+      {/* Spotlight: gives the copy its own contrast so the backdrop's
+          billboard and mountains can stay bright around it */}
+      <div className="absolute inset-0 hero-spotlight pointer-events-none"></div>
+
+      {/* Warm red bloom lifted from the artwork's sunset */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[560px] h-[320px] bg-red-600/12 rounded-full blur-[110px] pointer-events-none"></div>
+
+      {/* Lower edge light-catch */}
+      <div className="absolute bottom-0 left-0 right-0 h-px hero-edge-glow pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         
+        {/* Brand slot - reserves the big logo's box. The mark itself is the
+            single <BrandLogoDock/> element, which scales down and travels up
+            into the header as the page scrolls. */}
+        <div
+          id={HERO_SLOT_ID}
+          aria-hidden="true"
+          className="mx-auto mb-7 w-[min(74vw,430px)] aspect-[313/76]"
+        />
+
         {/* Top Tagline Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-950/40 border border-red-500/30 text-red-400 text-[11px] font-semibold mb-6">
           <Flame className="w-3.5 h-3.5 text-red-500" />
           <span className="uppercase tracking-wider">360° Integrated Growth Agency</span>
           <span className="w-1 h-1 rounded-full bg-red-500"></span>
-          <span className="text-zinc-300">Pakistan & Beyond</span>
+          <span className="text-zinc-300">Pakistan &amp; Beyond</span>
         </div>
 
         {/* Scaled & Balanced Center Headline */}

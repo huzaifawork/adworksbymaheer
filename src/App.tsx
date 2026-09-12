@@ -12,14 +12,18 @@ import { GrowthRoadmap } from './components/GrowthRoadmap';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { StrategyCalculatorModal } from './components/StrategyCalculatorModal';
+import { SiteBackground } from './components/SiteBackground';
 
 export function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080708] text-white selection:bg-red-600 selection:text-white">
+    <div className="relative min-h-screen text-white selection:bg-red-600 selection:text-white">
+      {/* Sticky full-site brand backdrop */}
+      <SiteBackground />
+
       {/* Navigation Header */}
-      <Navbar onOpenConsultationModal={() => setIsModalOpen(true)} />
+      <Navbar />
 
       {/* Main Single Page Content */}
       <main>

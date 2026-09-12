@@ -3,7 +3,7 @@ import { Phone, Mail, Globe, ArrowUpRight, Instagram, Facebook, Linkedin } from 
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#050405] text-white pt-14 pb-10 border-t border-white/10 relative overflow-hidden">
+    <footer className="bg-[#050405]/85 backdrop-blur-sm text-white pt-14 pb-10 border-t border-white/10 relative overflow-hidden">
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
