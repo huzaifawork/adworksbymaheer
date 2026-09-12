@@ -13,7 +13,17 @@ export const HERO_SLOT_ID = 'brand-slot-hero';
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-export const BrandLogoDock: React.FC = () => {
+interface BrandLogoDockProps {
+  /**
+   * Pin the mark to its docked header position regardless of scroll. Used
+   * while the mobile menu is open: at the top of the page the mark is still
+   * at hero size in mid-screen, and since it sits above the menu overlay it
+   * would otherwise float across the menu.
+   */
+  forceDocked?: boolean;
+}
+
+export const BrandLogoDock: React.FC<BrandLogoDockProps> = ({ forceDocked = false }) => {
   const dockRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -62,7 +72,7 @@ export const BrandLogoDock: React.FC = () => {
 
       const base = 'translate(-50%, -50%)';
 
-      if (!hasHero || reduceMotion) {
+      if (!hasHero || reduceMotion || forceDocked) {
         el.style.transform = `${base} scale(1)`;
         el.style.opacity = '1';
         return;
@@ -112,7 +122,7 @@ export const BrandLogoDock: React.FC = () => {
       ro.disconnect();
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [forceDocked]);
 
   return (
     <a

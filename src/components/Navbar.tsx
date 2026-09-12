@@ -38,7 +38,12 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-[#09080A]/95 border-b border-white/10 h-16 sm:h-20 shadow-lg shadow-black/50' : 'bg-transparent h-16 sm:h-20'
+      /* Solid while the menu is open too: at the top of the page the bar is
+         transparent, and the menu's scrolling panels would otherwise show
+         through behind the logo and the X. */
+      scrolled || mobileMenuOpen
+        ? 'bg-[#09080A]/95 border-b border-white/10 h-16 sm:h-20 shadow-lg shadow-black/50'
+        : 'bg-transparent h-16 sm:h-20'
     }`}>
       {/* z-50 keeps the toolbar - and its X toggle - above the menu
           overlay, which is a child of this same header at z-40. */}
@@ -108,7 +113,7 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Single brand mark: large in the hero, docked here once scrolled */}
-      <BrandLogoDock />
+      <BrandLogoDock forceDocked={mobileMenuOpen} />
 
       {/* Mobile nav: trivision hoarding panels */}
       <HoardingMenu
