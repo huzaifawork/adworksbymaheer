@@ -40,7 +40,9 @@ export const Navbar: React.FC = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled ? 'bg-[#09080A]/95 border-b border-white/10 h-16 sm:h-20 shadow-lg shadow-black/50' : 'bg-transparent h-16 sm:h-20'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      {/* z-50 keeps the toolbar - and its X toggle - above the menu
+          overlay, which is a child of this same header at z-40. */}
+      <div className="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
 
           {/* Brand slot - reserves the logo's exact box. The visible mark is

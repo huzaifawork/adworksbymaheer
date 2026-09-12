@@ -298,6 +298,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .menu-veil {
+  /* Opaque ground set here rather than as a Tailwind arbitrary-opacity class:
+     bg-[#070608]/98 was silently dropped (98 is not a valid opacity step),
+     leaving the overlay fully transparent. */
+  background-color: #070608;
+  background-image: radial-gradient(
+    90% 45% at 50% 0%,
+    rgba(230, 0, 0, 0.10) 0%,
+    rgba(230, 0, 0, 0.03) 45%,
+    transparent 80%
+  );
   animation: menuVeilIn 260ms ease-out both;
 }
 

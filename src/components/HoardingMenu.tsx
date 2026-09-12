@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 /**
  * Mobile navigation styled and animated as a trivision hoarding - the
@@ -64,25 +64,13 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
     <div className="xl:hidden fixed inset-0 z-40" role="dialog" aria-modal="true" aria-label="Menu">
       {/* Night ground behind the gantry */}
       <div
-        className="menu-veil absolute inset-0 bg-[#070608]/98"
+        className="menu-veil absolute inset-0"
         onClick={onClose}
       />
 
       <div className="relative h-full overflow-y-auto overscroll-contain pt-16 sm:pt-20 pb-8 px-4">
-        {/* Close - the header toggle sits beneath this overlay, so the menu
-            carries its own control */}
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close menu"
-          className="menu-plate absolute right-4 top-[4.5rem] sm:top-[5.5rem] z-10 inline-flex items-center gap-1.5 rounded-md border border-red-500/40 bg-black/70 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-red-400 active:bg-red-600 active:text-white transition-colors"
-        >
-          <X className="w-3.5 h-3.5" />
-          <span>Close</span>
-        </button>
-
         {/* ---- Lamp gantry: strikes on, then lights the boards below ---- */}
-        <div className="relative mx-auto mt-9 max-w-md" aria-hidden="true">
+        <div className="relative mx-auto max-w-md" aria-hidden="true">
           <div className="flex items-end justify-between px-3">
             {Array.from({ length: LAMP_COUNT }).map((_, i) => (
               <div key={i} className="relative flex flex-col items-center">
