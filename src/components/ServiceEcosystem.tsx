@@ -149,7 +149,7 @@ export const ServiceEcosystem: React.FC = () => {
         </div>
 
         {/* Selected Division Details */}
-        <div className="card-base p-6 sm:p-8 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/30">
+        <div className="card-base p-6 sm:p-8 bg-[#0F0C12]/85 border-red-500/30">
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>

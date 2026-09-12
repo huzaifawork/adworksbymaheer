@@ -25,7 +25,7 @@ export const AboutDirector: React.FC = () => {
           
           {/* Left Column: Director Photo */}
           <div className="lg:col-span-5 max-w-sm mx-auto lg:max-w-none w-full">
-            <div className="card-base p-2.5 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/20">
+            <div className="card-base p-2.5 bg-[#0F0C12]/85 border-red-500/20">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-900">
                 <img
                   src="/maheer_director.png"
@@ -34,7 +34,7 @@ export const AboutDirector: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
 
-                <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/80 backdrop-blur-md rounded-lg border border-white/10">
+                <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/85 rounded-lg border border-white/10">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-heading font-bold text-base text-white">Maheer</h3>

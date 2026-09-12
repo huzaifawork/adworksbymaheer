@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 
 /**
  * Mobile navigation styled and animated as a trivision hoarding - the
@@ -64,19 +64,31 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
     <div className="xl:hidden fixed inset-0 z-40" role="dialog" aria-modal="true" aria-label="Menu">
       {/* Night ground behind the gantry */}
       <div
-        className="menu-veil absolute inset-0 bg-[#070608]/97 backdrop-blur-xl"
+        className="menu-veil absolute inset-0 bg-[#070608]/98"
         onClick={onClose}
       />
 
       <div className="relative h-full overflow-y-auto overscroll-contain pt-16 sm:pt-20 pb-8 px-4">
+        {/* Close - the header toggle sits beneath this overlay, so the menu
+            carries its own control */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close menu"
+          className="menu-plate absolute right-4 top-[4.5rem] sm:top-[5.5rem] z-10 inline-flex items-center gap-1.5 rounded-md border border-red-500/40 bg-black/70 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-red-400 active:bg-red-600 active:text-white transition-colors"
+        >
+          <X className="w-3.5 h-3.5" />
+          <span>Close</span>
+        </button>
+
         {/* ---- Lamp gantry: strikes on, then lights the boards below ---- */}
-        <div className="relative mx-auto max-w-md" aria-hidden="true">
+        <div className="relative mx-auto mt-9 max-w-md" aria-hidden="true">
           <div className="flex items-end justify-between px-3">
             {Array.from({ length: LAMP_COUNT }).map((_, i) => (
               <div key={i} className="relative flex flex-col items-center">
                 {/* housing */}
                 <span className="block w-3.5 h-1.5 rounded-t-sm bg-zinc-700" />
-                <span className="block w-5 h-2 rounded-b-[3px] bg-gradient-to-b from-zinc-600 to-zinc-800 border-b border-amber-200/40" />
+                <span className="block w-5 h-2 rounded-b-[3px] bg-gradient-to-b from-zinc-700 to-zinc-900 border-b border-red-400/50" />
                 {/* Light cone. No negative z-index: this sits inside the
                     overlay's z-40 stacking context, where -z would drop it
                     behind the backdrop and vanish. It paints over the boards
@@ -86,14 +98,14 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
                   style={{
                     animationDelay: `${90 + i * 45}ms`,
                     background:
-                      'radial-gradient(50% 60% at 50% 0%, rgba(255,186,104,0.55) 0%, rgba(255,150,60,0.16) 45%, transparent 75%)',
+                      'radial-gradient(50% 60% at 50% 0%, rgba(255,70,70,0.55) 0%, rgba(230,0,0,0.18) 45%, transparent 75%)',
                   }}
                 />
               </div>
             ))}
           </div>
           {/* gantry rail */}
-          <div className="mt-1 h-px bg-gradient-to-r from-transparent via-amber-200/30 to-transparent" />
+          <div className="mt-1 h-px bg-gradient-to-r from-transparent via-red-500/35 to-transparent" />
         </div>
 
         {/* ---- The boards ---- */}

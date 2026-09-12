@@ -19,6 +19,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Belongs on the scrolling root, not on every element */
+html {
   scroll-behavior: smooth;
 }
 
@@ -54,8 +58,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Uniform Card & Panel Utilities */
 @layer utilities {
   .card-base {
-    background-color: rgba(18, 16, 21, 0.8);
-    backdrop-filter: blur(12px);
+    /* No backdrop-filter here: this class is used on ~26 elements and each
+       one would resample + blur the fixed backdrop on every scroll frame.
+       At 0.86 opacity the blur was imperceptible anyway. */
+    background-color: rgba(18, 16, 21, 0.86);
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
     transition: all 0.25s ease-in-out;
@@ -116,9 +122,8 @@ h1, h2, h3, h4, h5, h6 {
   background-size: cover;
   background-position: center 45%;
   background-repeat: no-repeat;
-  /* Crisp: no blur. A small brightness/saturation lift keeps the
-     mountains and sunset reading through the veils above. */
-  filter: saturate(1.14) brightness(1.08) contrast(1.02);
+  /* The saturation/brightness/contrast lift is baked into the image files:
+     as a CSS filter it forced a viewport-sized layer to be re-filtered. */
   transform: scale(1.02);
   opacity: 1;
 }
@@ -158,14 +163,12 @@ h1, h2, h3, h4, h5, h6 {
    value across content sections avoids visible banding on scroll. */
 @layer utilities {
   .section-veil {
-    background-color: rgba(9, 8, 10, 0.58);
-    backdrop-filter: blur(1px);
+    background-color: rgba(9, 8, 10, 0.60);
   }
 
   /* Form- and detail-heavy sections get a little more cover */
   .section-veil-strong {
-    background-color: rgba(9, 8, 10, 0.70);
-    backdrop-filter: blur(2px);
+    background-color: rgba(9, 8, 10, 0.72);
   }
 
   /* Hero: the reveal moment. Only a light wash, so the billboard and
@@ -212,18 +215,13 @@ h1, h2, h3, h4, h5, h6 {
    blurring it is expensive, so lean on a touch more veil instead. */
 @media (max-width: 640px) {
   .site-bg-image {
-    filter: saturate(1.12) brightness(1.06);
     opacity: 0.95;
   }
   .section-veil {
-    background-color: rgba(9, 8, 10, 0.68);
+    background-color: rgba(9, 8, 10, 0.70);
   }
   .section-veil-strong {
-    background-color: rgba(9, 8, 10, 0.78);
-  }
-  .section-veil,
-  .section-veil-strong {
-    backdrop-filter: none;
+    background-color: rgba(9, 8, 10, 0.80);
   }
 }
 
@@ -243,6 +241,20 @@ h1, h2, h3, h4, h5, h6 {
     background-position: center top;
     inset: 0;
     transform: none;
+  }
+
+  /* On a phone the billboard lands directly behind the hero copy, so deepen
+     and widen the pool: the board, gantry and road still read, while its own
+     wordmark stays well back of the site's headline and logo. */
+  .hero-spotlight {
+    background:
+      radial-gradient(
+        82% 54% at 50% 40%,
+        rgba(9, 8, 10, 0.80) 0%,
+        rgba(9, 8, 10, 0.66) 42%,
+        rgba(9, 8, 10, 0.30) 72%,
+        transparent 92%
+      );
   }
 }
 
@@ -314,8 +326,8 @@ h1, h2, h3, h4, h5, h6 {
 .panel-spill {
   background: linear-gradient(
     to bottom,
-    rgba(255, 176, 84, 0.20) 0%,
-    rgba(255, 140, 60, 0.07) 38%,
+    rgba(255, 62, 62, 0.20) 0%,
+    rgba(230, 0, 0, 0.07) 38%,
     transparent 78%
   );
 }

@@ -59,7 +59,7 @@ export const OneStopModel: React.FC = () => {
           </div>
 
           {/* Adworks Integrated Model */}
-          <div className="card-base p-6 bg-[#0F0C12]/85 backdrop-blur-sm border-red-500/40">
+          <div className="card-base p-6 bg-[#0F0C12]/85 border-red-500/40">
             <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-red-500/30">
               <CheckCircle2 className="w-5 h-5 text-red-500" />
               <div>

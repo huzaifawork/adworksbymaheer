@@ -119,7 +119,7 @@ export const HoardingsShowcase: React.FC<HoardingsShowcaseProps> = ({ onOpenModa
                 </picture>
                 {/* Keeps the photo sitting in the dark theme and the caption legible */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/30"></div>
-                <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/80 backdrop-blur-md rounded-lg border border-white/10">
+                <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/85 rounded-lg border border-white/10">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-white mb-0.5">
                     <Sparkles className="w-3.5 h-3.5 text-red-500" />
                     <span>Outdoor + Digital Retargeting</span>
@@ -179,7 +179,7 @@ export const HoardingsShowcase: React.FC<HoardingsShowcaseProps> = ({ onOpenModa
                 <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/20 group-hover:from-black/85 transition-colors duration-300"></div>
 
                 {/* Index chip */}
-                <span className="absolute top-2.5 left-2.5 w-6 h-6 rounded-md bg-black/70 backdrop-blur-sm border border-white/10 text-[10px] font-bold text-red-400 flex items-center justify-center">
+                <span className="absolute top-2.5 left-2.5 w-6 h-6 rounded-md bg-black/80 border border-white/10 text-[10px] font-bold text-red-400 flex items-center justify-center">
                   {String(i + 1).padStart(2, '0')}
                 </span>
 

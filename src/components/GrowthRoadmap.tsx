@@ -60,7 +60,7 @@ export const GrowthRoadmap: React.FC = () => {
             <div 
               key={idx}
               className={`card-base p-4 relative ${
-                p.active ? 'border-red-500/40 bg-[#0F0C12]/85 backdrop-blur-sm' : 'bg-[#121015]/75 opacity-75'
+                p.active ? 'border-red-500/40 bg-[#0F0C12]/85' : 'bg-[#121015]/75 opacity-75'
               }`}
             >
               <div className="flex items-center justify-between mb-3">

@@ -119,7 +119,7 @@ export const BrandLogoDock: React.FC = () => {
       ref={dockRef}
       href="#"
       aria-label="Adworks by Maheer - back to top"
-      className="fixed opacity-0 will-change-transform"
+      className="fixed z-50 opacity-0 will-change-transform"
       style={{ left: 0, top: 0, transform: 'translate(-50%, -50%)', transformOrigin: 'center center' }}
     >
       <img
