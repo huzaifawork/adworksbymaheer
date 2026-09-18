@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Phone, Mail, Globe, MapPin, Send, MessageSquare, CheckCircle2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, MessageSquare, CheckCircle2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
 import { celebrate } from '../lib/celebrate';
-import { EMAIL, EMAIL_HREF, PHONE_HREF, PORTFOLIO_DISPLAY, PORTFOLIO_URL, WHATSAPP_URL } from '../lib/contact';
+import { EMAIL, EMAIL_HREF, PHONE_HREF, WHATSAPP_URL } from '../lib/contact';
 
 interface ContactSectionProps {
   onOpenModal: () => void;
@@ -79,24 +79,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                     <span className="text-[10px] text-zinc-400 font-semibold block">Official Email</span>
                     <a href={EMAIL_HREF} className="font-bold text-white hover:text-red-400 text-xs sm:text-sm block">
                       {EMAIL}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Portfolio */}
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-500 flex items-center justify-center shrink-0">
-                    <Globe className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-zinc-400 font-semibold block">Director Portfolio</span>
-                    <a 
-                      href={PORTFOLIO_URL} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="font-bold text-red-400 hover:underline text-xs block"
-                    >
-                      {PORTFOLIO_DISPLAY}
                     </a>
                   </div>
                 </div>

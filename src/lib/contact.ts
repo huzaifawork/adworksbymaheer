@@ -17,8 +17,9 @@ export const PHONE_HREF = `tel:+${PHONE_E164}`;
 export const EMAIL = 'adworksbymaheer@gmail.com';
 export const EMAIL_HREF = `mailto:${EMAIL}`;
 
-export const PORTFOLIO_URL = 'https://maheer-s-portfolio.vercel.app/';
-export const PORTFOLIO_DISPLAY = 'maheer-s-portfolio.vercel.app';
+/** Public social profiles. */
+export const INSTAGRAM_URL = 'https://www.instagram.com/adworksbymaheer/';
+export const FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=61590609124976';
 
 /** Opens WhatsApp with a message already drafted. */
 export const waLink = (message: string) =>

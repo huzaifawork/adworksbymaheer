@@ -1,12 +1,12 @@
 import React from 'react';
-import { Phone, Mail, Globe, ArrowUpRight, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { Phone, Mail, Instagram, Facebook } from 'lucide-react';
 import {
   EMAIL,
   EMAIL_HREF,
+  FACEBOOK_URL,
+  INSTAGRAM_URL,
   PHONE_DISPLAY,
   PHONE_HREF,
-  PORTFOLIO_DISPLAY,
-  PORTFOLIO_URL,
 } from '../lib/contact';
 
 export const Footer: React.FC = () => {
@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 3: Direct Contacts & Portfolio */}
+          {/* Col 3: Direct Contacts */}
           <div className="lg:col-span-4 space-y-2.5">
             <h4 className="font-heading font-bold text-xs text-red-400 uppercase tracking-wider">
               Direct Contact
@@ -72,19 +72,6 @@ export const Footer: React.FC = () => {
                 <span>Email:</span>
                 <a href={EMAIL_HREF} className="font-bold text-white hover:text-red-400">{EMAIL}</a>
               </li>
-              <li className="flex items-center gap-2 pt-0.5">
-                <Globe className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                <span>Director Portfolio:</span>
-                <a 
-                  href={PORTFOLIO_URL} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-bold text-red-400 hover:underline flex items-center gap-1"
-                >
-                  <span>{PORTFOLIO_DISPLAY}</span>
-                  <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -99,14 +86,23 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-4">
             <span className="text-zinc-400 font-medium">Follow: <strong className="text-white">@adworksbymaheer</strong></span>
             <div className="flex items-center gap-2">
-              <a href="#" className="w-7 h-7 rounded-full bg-white/5 hover:bg-red-600/30 hover:text-red-400 text-zinc-400 flex items-center justify-center transition" aria-label="Instagram">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-red-600/30 hover:text-red-400 text-zinc-400 flex items-center justify-center transition"
+                aria-label="Adworks by Maheer on Instagram"
+              >
                 <Instagram className="w-3.5 h-3.5" />
               </a>
-              <a href="#" className="w-7 h-7 rounded-full bg-white/5 hover:bg-red-600/30 hover:text-red-400 text-zinc-400 flex items-center justify-center transition" aria-label="Facebook">
+              <a
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-red-600/30 hover:text-red-400 text-zinc-400 flex items-center justify-center transition"
+                aria-label="Adworks by Maheer on Facebook"
+              >
                 <Facebook className="w-3.5 h-3.5" />
-              </a>
-              <a href="#" className="w-7 h-7 rounded-full bg-white/5 hover:bg-red-600/30 hover:text-red-400 text-zinc-400 flex items-center justify-center transition" aria-label="LinkedIn">
-                <Linkedin className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
