@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Flame, ShieldCheck, Sparkles, Building2, TrendingUp, Compass } from 'lucide-react';
 import { HERO_SLOT_ID } from './BrandLogoDock';
+import { TrivisionHeadline } from './TrivisionHeadline';
 
 interface HeroProps {
   onOpenModal: () => void;
@@ -39,10 +40,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
           <span className="text-zinc-300">Pakistan &amp; Beyond</span>
         </div>
 
-        {/* Scaled & Balanced Center Headline */}
-        <h1 className="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-tight leading-tight text-white mb-5">
-          YOUR <span className="gradient-text-red">ONE-STOP</span> MARKETING SOLUTION
-        </h1>
+        {/* The headline is a trivision board - it turns between three
+            messages the way the client's own sites do. */}
+        <TrivisionHeadline />
 
         {/* Clean Sub-headline */}
         <p className="max-w-2xl mx-auto text-xs sm:text-sm text-zinc-300 font-normal mb-8 leading-relaxed">

@@ -361,3 +361,188 @@ h1, h2, h3, h4, h5, h6 {
     transform: none;
   }
 }
+
+/* ============================================================
+   Trivision hero headline
+   A real trivision board is built from triangular slats that
+   rotate in unison to show three ads on one site. The headline
+   turns the same way: one continuous rotation where the outgoing
+   face falls to -90deg as the incoming face rises from +90deg.
+   ============================================================ */
+
+.trivision {
+  display: grid;
+  /* Every face shares one grid cell, so the block is always as tall as its
+     tallest message - no absolute positioning, no measured height, no shift. */
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.trivision-face,
+.trivision-seams {
+  grid-area: 1 / 1;
+}
+
+.trivision-face {
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The slats are opaque, so two messages must never be legible at once. The
+   outgoing face is gone by 200ms and the incoming one only begins to appear
+   after that, leaving a brief dark beat as the prism edge passes - which is
+   exactly what a real board does mid-turn. */
+.trivision-face[data-state='active'] {
+  transform: rotateX(0deg);
+  opacity: 1;
+  transition:
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease-out 200ms;
+}
+
+/* The face being replaced keeps rotating in the same direction it was going,
+   so the board reads as one prism turning rather than two things cross-fading. */
+.trivision-face[data-state='leaving'] {
+  transform: rotateX(-90deg);
+  opacity: 0;
+  transition:
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 190ms ease-in;
+}
+
+/* Parked out of sight waiting its turn. Snapped, not animated: it has to get
+   from -90 back round to +90 without sweeping through the readable position.
+   Invisible either way, since it is parked at zero opacity. */
+.trivision-face[data-state='parked'] {
+  transform: rotateX(90deg);
+  opacity: 0;
+  transition: none;
+}
+
+/* Slat seams. Hidden at rest so the type stays clean; they surface only while
+   the board turns, which is the moment the structure should be legible. */
+.trivision-seams {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.55) 0px,
+    rgba(0, 0, 0, 0.55) 1px,
+    transparent 1px,
+    transparent 34px
+  );
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+
+.trivision-seams[data-turning] {
+  opacity: 1;
+}
+
+/* Static board: the first message, no moving parts. */
+@media (prefers-reduced-motion: reduce) {
+  .trivision-face {
+    transition: none;
+  }
+  .trivision-seams {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Illuminated signboards (ProjectsShowcase)
+   These are lightboxes, so the board strikes on rather than
+   fading in: the face stumbles twice before the gear holds,
+   the way a real discharge tube does.
+   ============================================================ */
+
+/* Two stumbles, then it holds - applied to the dark face, so the whole
+   board flickers to life rather than just a glow layer appearing. */
+@keyframes signFaceStrike {
+  0%   { opacity: 0.68; }
+  16%  { opacity: 0.06; }
+  25%  { opacity: 0.6; }
+  38%  { opacity: 0.03; }
+  47%  { opacity: 0.42; }
+  62%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes signGlowStrike {
+  0%   { opacity: 0; }
+  16%  { opacity: 0.9; }
+  25%  { opacity: 0.12; }
+  38%  { opacity: 0.95; }
+  47%  { opacity: 0.3; }
+  62%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* Unlit: the photograph sits behind a dark face, tubes cold. */
+.sign-dim {
+  background-color: #06050A;
+  opacity: 0.68;
+}
+
+.sign-glow {
+  opacity: 0;
+  /* Light coming from inside the box, strongest across the sign itself. */
+  background:
+    radial-gradient(70% 55% at 50% 42%, rgba(255, 238, 220, 0.20) 0%, rgba(255, 150, 110, 0.07) 45%, transparent 78%),
+    radial-gradient(90% 70% at 50% 100%, rgba(230, 0, 0, 0.16) 0%, transparent 70%);
+}
+
+.sign-tag {
+  color: #71717A; /* zinc-500: unpowered */
+  transition: color 420ms ease-out, text-shadow 420ms ease-out;
+}
+
+/* Powered. */
+.signboard[data-lit] .sign-dim {
+  animation: signFaceStrike 760ms steps(1, end) forwards;
+}
+
+.signboard[data-lit] .sign-glow {
+  animation: signGlowStrike 760ms steps(1, end) forwards;
+}
+
+.signboard[data-lit] .sign-tag {
+  color: #F87171; /* red-400 */
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.55);
+  transition-delay: 460ms;
+}
+
+/* Light spilling out of the box onto the wall behind it. */
+.signboard {
+  transition: box-shadow 520ms ease-out, border-color 250ms ease-in-out;
+}
+
+.signboard[data-lit] {
+  box-shadow: 0 10px 34px -14px rgba(230, 0, 0, 0.34);
+  transition-delay: 460ms;
+}
+
+/* Standing closer to a lit sign. */
+.signboard[data-lit]:hover {
+  box-shadow: 0 12px 44px -12px rgba(230, 0, 0, 0.52);
+  transition-delay: 0ms;
+}
+
+/* No flicker: the boards are simply already on. */
+@media (prefers-reduced-motion: reduce) {
+  .signboard[data-lit] .sign-dim {
+    animation: none;
+    opacity: 0;
+  }
+  .signboard[data-lit] .sign-glow {
+    animation: none;
+    opacity: 1;
+  }
+  .signboard[data-lit] .sign-tag,
+  .signboard[data-lit] {
+    transition-delay: 0ms;
+  }
+}
