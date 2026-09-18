@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserCheck, Award, CheckCircle2, Quote } from 'lucide-react';
+import { UserCheck, Award, CheckCircle2 } from 'lucide-react';
 
 export const AboutDirector: React.FC = () => {
   return (
@@ -27,11 +27,20 @@ export const AboutDirector: React.FC = () => {
           <div className="lg:col-span-5 max-w-sm mx-auto lg:max-w-none w-full">
             <div className="card-base p-2.5 bg-[#0F0C12]/85 border-red-500/20">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-900">
-                <img
-                  src="/maheer_director.png"
-                  alt="Maheer - Director, Founder & Owner of Adworks"
-                  className="w-full h-full object-cover object-top"
-                />
+                {/* Source is pre-cropped to 4:5 around the face, so the browser
+                    ships no pixels it will not paint. */}
+                <picture className="contents">
+                  <source srcSet="/maheer-director.webp" type="image/webp" />
+                  <img
+                    src="/maheer-director.jpg"
+                    alt="Maheer - Director, Founder & Owner of Adworks"
+                    width={819}
+                    height={1024}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
 
                 <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/85 rounded-lg border border-white/10">

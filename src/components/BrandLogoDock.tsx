@@ -132,9 +132,15 @@ export const BrandLogoDock: React.FC<BrandLogoDockProps> = ({ forceDocked = fals
       className="fixed z-50 opacity-0 will-change-transform"
       style={{ left: 0, top: 0, transform: 'translate(-50%, -50%)', transformOrigin: 'center center' }}
     >
+      {/* The mark sitting in the hero on first paint - an LCP candidate,
+          so it is fetched eagerly and ahead of the queue. */}
       <img
         src="/whitelogo-trimmed.png"
         alt="Adworks by Maheer"
+        width={313}
+        height={76}
+        fetchPriority="high"
+        decoding="async"
         className="block h-9 sm:h-11 lg:h-12 w-auto object-contain drop-shadow-[0_2px_14px_rgba(0,0,0,0.6)]"
       />
     </a>

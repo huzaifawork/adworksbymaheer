@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useCallback, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutDirector } from './components/AboutDirector';
@@ -11,11 +11,21 @@ import { IndustriesServed } from './components/IndustriesServed';
 import { GrowthRoadmap } from './components/GrowthRoadmap';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { StrategyCalculatorModal } from './components/StrategyCalculatorModal';
 import { SiteBackground } from './components/SiteBackground';
+
+// The lead-capture dialog is a few kB of form state nobody needs until they
+// actually ask for it, so it is split into its own chunk fetched on first open.
+const StrategyCalculatorModal = lazy(() =>
+  import('./components/StrategyCalculatorModal').then(m => ({ default: m.StrategyCalculatorModal }))
+);
 
 export function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Stable identities so toggling the modal doesn't hand every section a
+  // brand-new prop, keeping the door open for React.memo on any of them.
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
     <div className="relative min-h-screen text-white selection:bg-red-600 selection:text-white">
@@ -28,7 +38,7 @@ export function App() {
       {/* Main Single Page Content */}
       <main>
         {/* Hero Section */}
-        <Hero onOpenModal={() => setIsModalOpen(true)} />
+        <Hero onOpenModal={openModal} />
 
         {/* About Director & Agency */}
         <AboutDirector />
@@ -37,7 +47,7 @@ export function App() {
         <ServiceEcosystem />
 
         {/* 150+ Outdoor Hoardings Asset Feature */}
-        <HoardingsShowcase onOpenModal={() => setIsModalOpen(true)} />
+        <HoardingsShowcase onOpenModal={openModal} />
 
         {/* Featured Signage & Branding Projects */}
         <ProjectsShowcase />
@@ -55,17 +65,18 @@ export function App() {
         <GrowthRoadmap />
 
         {/* Dedicated Contact Us Section */}
-        <ContactSection onOpenModal={() => setIsModalOpen(true)} />
+        <ContactSection onOpenModal={openModal} />
       </main>
 
       {/* Agency Footer */}
       <Footer />
 
-      {/* Strategy Calculator Lead Modal */}
-      <StrategyCalculatorModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      {/* Strategy Calculator Lead Modal - mounted only once requested */}
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <StrategyCalculatorModal isOpen onClose={closeModal} />
+        </Suspense>
+      )}
     </div>
   );
 }

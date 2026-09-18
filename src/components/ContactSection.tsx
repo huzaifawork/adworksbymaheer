@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, Mail, Globe, MapPin, Send, MessageSquare, CheckCircle2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { celebrate } from '../lib/celebrate';
+import { EMAIL, EMAIL_HREF, PHONE_HREF, PORTFOLIO_DISPLAY, PORTFOLIO_URL, WHATSAPP_URL } from '../lib/contact';
 
 interface ContactSectionProps {
   onOpenModal: () => void;
@@ -19,7 +20,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    confetti({ particleCount: 90, spread: 60, origin: { y: 0.7 } });
+    void celebrate(90);
   };
 
   return (
@@ -63,7 +64,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                   </div>
                   <div>
                     <span className="text-[10px] text-zinc-400 font-semibold block">Phone / WhatsApp</span>
-                    <a href="tel:+923177272777" className="font-bold text-white hover:text-red-400 text-xs sm:text-sm block">
+                    <a href={PHONE_HREF} className="font-bold text-white hover:text-red-400 text-xs sm:text-sm block">
                       +92 317 7272777
                     </a>
                   </div>
@@ -76,8 +77,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                   </div>
                   <div>
                     <span className="text-[10px] text-zinc-400 font-semibold block">Official Email</span>
-                    <a href="mailto:adworksbymaheer@gmail.com" className="font-bold text-white hover:text-red-400 text-xs sm:text-sm block">
-                      adworksbymaheer@gmail.com
+                    <a href={EMAIL_HREF} className="font-bold text-white hover:text-red-400 text-xs sm:text-sm block">
+                      {EMAIL}
                     </a>
                   </div>
                 </div>
@@ -90,12 +91,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                   <div>
                     <span className="text-[10px] text-zinc-400 font-semibold block">Director Portfolio</span>
                     <a 
-                      href="https://maheer-s-portfolio.vercel.app/" 
+                      href={PORTFOLIO_URL} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="font-bold text-red-400 hover:underline text-xs block"
                     >
-                      maheer-s-portfolio.vercel.app
+                      {PORTFOLIO_DISPLAY}
                     </a>
                   </div>
                 </div>
@@ -116,7 +117,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
               {/* WhatsApp Action Button */}
               <div className="mt-5 pt-3 border-t border-white/10">
                 <a
-                  href="https://wa.me/923177272777?text=Hi%20Adworks%20Team,%20I%20would%20like%20to%20discuss%20marketing%20services."
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
@@ -166,8 +167,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-semibold text-zinc-300 mb-1">Your Full Name *</label>
+                        <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="contact-name">Your Full Name *</label>
                         <input
+                          id="contact-name"
+                          autoComplete="name"
                           type="text"
                           required
                           placeholder="e.g. Hassan Malik"
@@ -178,8 +181,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-zinc-300 mb-1">Phone / WhatsApp Number *</label>
+                        <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="contact-phone">Phone / WhatsApp Number *</label>
                         <input
+                          id="contact-phone"
+                          autoComplete="tel"
                           type="tel"
                           required
                           placeholder="+92 3XX XXXXXXX"
@@ -192,8 +197,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-semibold text-zinc-300 mb-1">Email Address *</label>
+                        <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="contact-email">Email Address *</label>
                         <input
+                          id="contact-email"
+                          autoComplete="email"
                           type="email"
                           required
                           placeholder="yourname@domain.com"
@@ -204,8 +211,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-zinc-300 mb-1">Primary Service Needed</label>
+                        <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="contact-service">Primary Service Needed</label>
                         <select
+                          id="contact-service"
                           value={formData.service}
                           onChange={e => setFormData({ ...formData, service: e.target.value })}
                           className="w-full bg-[#18141F] border border-white/10 rounded-lg px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500"
@@ -221,8 +229,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenModal }) =
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-300 mb-1">Project Details / Message *</label>
+                      <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="contact-message">Project Details / Message *</label>
                       <textarea
+                        id="contact-message"
                         rows={4}
                         required
                         placeholder="Tell us about your brand goals or hoarding location requirements..."

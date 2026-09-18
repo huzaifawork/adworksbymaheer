@@ -2,12 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { BrandLogoDock, HEADER_SLOT_ID } from './BrandLogoDock';
 import { HoardingMenu } from './HoardingMenu';
+import { PHONE_DISPLAY as WHATSAPP_DISPLAY, WHATSAPP_URL } from '../lib/contact';
 
-const WHATSAPP_NUMBER = '923177272777';
-const WHATSAPP_DISPLAY = '+92 317 7272777';
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  'Hi Adworks Team, I would like to discuss marketing services.'
-)}`;
 
 /* lucide-react ships no brand glyphs, so the WhatsApp mark is inlined */
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (

@@ -14,10 +14,17 @@
     <meta property="og:image" content="/whitelogo.png" />
     <meta property="og:type" content="website" />
 
-    <!-- Google Fonts -->
+    <!-- The backdrop is the first thing painted behind the hero; start it
+         before the CSS that references it has even been parsed. -->
+    <link rel="preload" as="image" href="/bgimage/bgimage.webp" type="image/webp" media="(min-aspect-ratio: 3/4)" />
+    <link rel="preload" as="image" href="/bgimage/bgimage-portrait.webp" type="image/webp" media="(max-aspect-ratio: 3/4)" />
+
+    <!-- Google Fonts: only the weights actually used. The italic axis is not
+         requested - one pull-quote gets synthetic oblique instead of doubling
+         the font payload. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..800;1,300..800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   </head>
   <body class="bg-black text-white antialiased selection:bg-red-600 selection:text-white">
     <div id="root"></div>

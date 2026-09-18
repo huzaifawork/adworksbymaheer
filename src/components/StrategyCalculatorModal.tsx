@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Sparkles, CheckCircle2, Send } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { celebrate } from '../lib/celebrate';
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,6 +17,26 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
     services: [] as string[],
     message: ''
   });
+
+  // While the dialog is up, freeze the page behind it: the backdrop-blur layer
+  // would otherwise re-composite the whole viewport on every scroll frame, and
+  // scrolling the page under a modal is disorienting either way.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -41,17 +61,22 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    confetti({
-      particleCount: 100,
-      spread: 60,
-      origin: { y: 0.6 }
-    });
+    void celebrate(100);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      
-      <div className="relative w-full max-w-xl bg-[#0E0C11] border border-red-500/40 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-red-950/80 max-h-[90vh] overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Book a strategy call with Adworks"
+      onClick={onClose}
+    >
+
+      <div
+        className="relative w-full max-w-xl bg-[#0E0C11] border border-red-500/40 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-red-950/80 max-h-[90vh] overflow-y-auto animate-modalIn"
+        onClick={e => e.stopPropagation()}
+      >
         
         {/* Close Button */}
         <button 
@@ -79,8 +104,10 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1">Your Full Name *</label>
+                  <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="lead-name">Your Full Name *</label>
                   <input
+                    id="lead-name"
+                    autoComplete="name"
                     type="text"
                     required
                     placeholder="e.g. Ali Ahmed"
@@ -91,8 +118,10 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1">Phone / WhatsApp Number *</label>
+                  <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="lead-phone">Phone / WhatsApp Number *</label>
                   <input
+                    id="lead-phone"
+                    autoComplete="tel"
                     type="tel"
                     required
                     placeholder="e.g. +92 300 1234567"
@@ -105,8 +134,10 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1">Email Address *</label>
+                  <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="lead-email">Email Address *</label>
                   <input
+                    id="lead-email"
+                    autoComplete="email"
                     type="email"
                     required
                     placeholder="name@company.com"
@@ -117,8 +148,10 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-300 mb-1">Company / Brand Name</label>
+                  <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="lead-company">Company / Brand Name</label>
                   <input
+                    id="lead-company"
+                    autoComplete="organization"
                     type="text"
                     placeholder="e.g. Nexus Properties"
                     value={formData.company}
@@ -155,8 +188,9 @@ export const StrategyCalculatorModal: React.FC<ModalProps> = ({ isOpen, onClose 
 
               {/* Message */}
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 mb-1">Project Brief / Objectives</label>
+                <label className="block text-xs font-semibold text-zinc-300 mb-1" htmlFor="lead-message">Project Brief / Objectives</label>
                 <textarea
+                  id="lead-message"
                   rows={2}
                   placeholder="Tell us about your brand goals, target timeline, or hoarding location requirements..."
                   value={formData.message}

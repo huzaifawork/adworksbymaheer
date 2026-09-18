@@ -1,5 +1,13 @@
 import React from 'react';
 import { Phone, Mail, Globe, ArrowUpRight, Instagram, Facebook, Linkedin } from 'lucide-react';
+import {
+  EMAIL,
+  EMAIL_HREF,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  PORTFOLIO_DISPLAY,
+  PORTFOLIO_URL,
+} from '../lib/contact';
 
 export const Footer: React.FC = () => {
   return (
@@ -17,6 +25,10 @@ export const Footer: React.FC = () => {
             <img 
               src="/whitelogo-trimmed.png" 
               alt="Adworks by Maheer Logo" 
+              width={313}
+              height={76}
+              loading="lazy"
+              decoding="async"
               className="h-11 sm:h-14 w-auto object-contain" 
             />
 
@@ -53,23 +65,23 @@ export const Footer: React.FC = () => {
               <li className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-red-500 shrink-0" />
                 <span>Call / WhatsApp:</span>
-                <a href="tel:+923177272777" className="font-bold text-white hover:text-red-400">+92 317 7272777</a>
+                <a href={PHONE_HREF} className="font-bold text-white hover:text-red-400">{PHONE_DISPLAY}</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-red-500 shrink-0" />
                 <span>Email:</span>
-                <a href="mailto:adworksbymaheer@gmail.com" className="font-bold text-white hover:text-red-400">adworksbymaheer@gmail.com</a>
+                <a href={EMAIL_HREF} className="font-bold text-white hover:text-red-400">{EMAIL}</a>
               </li>
               <li className="flex items-center gap-2 pt-0.5">
                 <Globe className="w-3.5 h-3.5 text-red-500 shrink-0" />
                 <span>Director Portfolio:</span>
                 <a 
-                  href="https://maheer-s-portfolio.vercel.app/" 
+                  href={PORTFOLIO_URL} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="font-bold text-red-400 hover:underline flex items-center gap-1"
                 >
-                  <span>maheer-s-portfolio.vercel.app</span>
+                  <span>{PORTFOLIO_DISPLAY}</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
