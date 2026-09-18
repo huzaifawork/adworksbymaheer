@@ -1,5 +1,12 @@
 import React from 'react';
 import { UserCheck, Award, CheckCircle2 } from 'lucide-react';
+// Imported rather than referenced from /public so Vite fingerprints the
+// filename. The portrait lives at a stable URL otherwise, which means a
+// replacement ships the same URL with different bytes and every browser
+// that already cached it keeps showing the old photo until its cache
+// expires. A content hash makes each revision its own URL.
+import portraitWebp from '../assets/maheer-about.webp';
+import portraitJpg from '../assets/maheer-about.jpg';
 
 export const AboutDirector: React.FC = () => {
   return (
@@ -30,9 +37,9 @@ export const AboutDirector: React.FC = () => {
                 {/* Source is pre-cropped to the 4:5 frame, so the browser
                     ships no pixels it will not paint. */}
                 <picture className="contents">
-                  <source srcSet="/maheer-about.webp" type="image/webp" />
+                  <source srcSet={portraitWebp} type="image/webp" />
                   <img
-                    src="/maheer-about.jpg"
+                    src={portraitJpg}
                     alt="Maheer - Director, Founder & Owner of Adworks"
                     width={900}
                     height={1125}
