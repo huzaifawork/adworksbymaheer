@@ -34,8 +34,8 @@ export const AboutDirector: React.FC = () => {
                   <img
                     src="/maheer-about.jpg"
                     alt="Maheer - Director, Founder & Owner of Adworks"
-                    width={640}
-                    height={800}
+                    width={900}
+                    height={1125}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-center"
