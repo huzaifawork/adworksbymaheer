@@ -37,3 +37,6 @@ ppt/
 
 # Original design source kept locally, not served or deployed
 design-assets/
+
+# Vercel CLI local build output
+.vercel/
