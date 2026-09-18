@@ -27,15 +27,15 @@ export const AboutDirector: React.FC = () => {
           <div className="lg:col-span-5 max-w-sm mx-auto lg:max-w-none w-full">
             <div className="card-base p-2.5 bg-[#0F0C12]/85 border-red-500/20">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-900">
-                {/* Source is pre-cropped to 4:5 around the face, so the browser
+                {/* Source is pre-cropped to the 4:5 frame, so the browser
                     ships no pixels it will not paint. */}
                 <picture className="contents">
-                  <source srcSet="/maheer-director.webp" type="image/webp" />
+                  <source srcSet="/maheer-about.webp" type="image/webp" />
                   <img
-                    src="/maheer-director.jpg"
+                    src="/maheer-about.jpg"
                     alt="Maheer - Director, Founder & Owner of Adworks"
-                    width={819}
-                    height={1024}
+                    width={640}
+                    height={800}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-center"

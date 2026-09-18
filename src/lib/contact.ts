@@ -20,6 +20,9 @@ export const EMAIL_HREF = `mailto:${EMAIL}`;
 /** Public social profiles. */
 export const INSTAGRAM_URL = 'https://www.instagram.com/adworksbymaheer/';
 export const FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=61590609124976';
+// The shared link carried ?_r= and ?_t= share-session tokens. They are not
+// needed for the profile to resolve, so only the canonical handle is stored.
+export const TIKTOK_URL = 'https://www.tiktok.com/@adworksbymaheer';
 
 /** Opens WhatsApp with a message already drafted. */
 export const waLink = (message: string) =>
