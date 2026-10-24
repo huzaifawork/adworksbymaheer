@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Briefcase, Lightbulb } from 'lucide-react';
+import React, { useState } from 'react';
+import { Expand } from 'lucide-react';
+import { Lightbox } from './Lightbox';
 
 const projects = [
   {
@@ -21,6 +22,9 @@ const projects = [
     name: 'Bester / Yosonda',
     image: '/project-images/bester-yosonda-signage',
     tag: 'Multi-Brand Directional Signage',
+    // The only landscape shot; cropping it to the portrait frame would cut
+    // the sign itself, so it is letterboxed over a blurred copy instead.
+    landscape: true,
   },
   {
     name: "Hi Link's",
@@ -34,85 +38,57 @@ const projects = [
   },
 ];
 
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+
 export const ProjectsShowcase: React.FC = () => {
-  // Every board starts unlit and strikes on as it comes into view, the way a
-  // row of shopfront signs does at dusk. These people build lightboxes - the
-  // work should arrive switched on, not as a flat photograph of one.
-  const [lit, setLit] = useState<boolean[]>(() => projects.map(() => false));
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setLit(projects.map(() => true));
-      return;
-    }
-
-    const timers: Array<ReturnType<typeof setTimeout>> = [];
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          const i = Number(el.dataset.idx);
-          // A board only ever strikes once.
-          io.unobserve(el);
-          // Boards that arrive together light left-to-right along the row
-          // instead of all snapping on at the same instant.
-          timers.push(
-            setTimeout(() => {
-              setLit((prev) => {
-                if (prev[i]) return prev;
-                const next = [...prev];
-                next[i] = true;
-                return next;
-              });
-            }, (i % 3) * 110)
-          );
-        }
-      },
-      { threshold: 0.28 }
-    );
-
-    cardRefs.current.forEach((el) => el && io.observe(el));
-
-    return () => {
-      io.disconnect();
-      timers.forEach(clearTimeout);
-    };
-  }, []);
+  // Index of the project open in the full-size viewer, or null when closed.
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section id="projects" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="red-badge mb-3">
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>Our Work</span>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-px w-8 bg-red-600/50" aria-hidden="true" />
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+                Our Work
+              </span>
+            </div>
+            <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-white">
+              Featured <span className="gradient-text-red">Signage Projects</span>
+            </h2>
+            <p className="mt-2 text-zinc-400 text-sm">
+              Illuminated signboards and storefront branding, designed, fabricated and installed by our team.
+            </p>
           </div>
-          <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-white">
-            Featured <span className="gradient-text-red">Signage Projects</span>
-          </h2>
-          <p className="mt-2 text-zinc-400 text-xs sm:text-sm">
-            A look at real illuminated signboards and branding installations delivered for our clients.
-          </p>
+          <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-zinc-500 shrink-0">
+            {projects.length} recent installations
+          </span>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-10">
           {projects.map((project, i) => (
-            <div
-              key={project.name}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              data-idx={i}
-              data-lit={lit[i] ? '' : undefined}
-              className="signboard card-base overflow-hidden group"
-            >
-              <div className="relative h-64 sm:h-72 overflow-hidden bg-black/40 flex items-center justify-center">
+            <figure key={project.name} className="group">
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                aria-label={`View ${project.name} signage full size`}
+                className="relative block w-full aspect-[3/4] overflow-hidden rounded-xl bg-zinc-900 border border-white/10 group-hover:border-red-500/40 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+              >
+                {'landscape' in project && (
+                  <img
+                    src={`${project.image}.webp`}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover scale-125 blur-xl"
+                  />
+                )}
                 <picture className="contents">
                   <source srcSet={`${project.image}.webp`} type="image/webp" />
                   <img
@@ -120,32 +96,45 @@ export const ProjectsShowcase: React.FC = () => {
                     alt={`${project.name} signage project by Adworks by Maheer`}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className={`relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
+                      'landscape' in project ? 'object-contain' : 'object-cover'
+                    }`}
                   />
                 </picture>
 
-                {/* Power off - the board sits dark until it strikes. */}
-                <span className="sign-dim pointer-events-none absolute inset-0" aria-hidden="true" />
+                <span className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2 py-0.5 rounded-md bg-black/60 text-[10px] font-mono font-bold text-zinc-300 tracking-wider">
+                  {pad(i)}
+                </span>
+                <span
+                  className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-8 h-8 rounded-lg bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  aria-hidden="true"
+                >
+                  <Expand className="w-3.5 h-3.5" />
+                </span>
+              </button>
 
-                {/* The light inside the box once it is running. */}
-                <span className="sign-glow pointer-events-none absolute inset-0" aria-hidden="true" />
-
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="sign-tag flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider mb-1">
-                    <Lightbulb className="w-3 h-3" />
-                    <span>{project.tag}</span>
-                  </div>
-                  <h3 className="font-heading font-bold text-base sm:text-lg text-white">
-                    {project.name}
-                  </h3>
-                </div>
-              </div>
-            </div>
+              <figcaption className="mt-3 sm:mt-4">
+                <h3 className="font-heading font-bold text-sm sm:text-lg text-white leading-tight group-hover:text-red-400 transition-colors">
+                  {project.name}
+                </h3>
+                <p className="mt-1 text-[11px] sm:text-xs text-zinc-400">{project.tag}</p>
+              </figcaption>
+            </figure>
           ))}
         </div>
 
       </div>
+
+      <Lightbox
+        items={projects.map(p => ({
+          image: p.image,
+          title: p.name,
+          caption: p.tag,
+          alt: `${p.name} signage project by Adworks by Maheer`,
+        }))}
+        index={open}
+        onChange={setOpen}
+      />
     </section>
   );
 };

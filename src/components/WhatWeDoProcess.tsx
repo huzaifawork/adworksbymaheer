@@ -3,42 +3,12 @@ import { Search, Compass, PenTool, Rocket, BarChart3, RefreshCw } from 'lucide-r
 
 export const WhatWeDoProcess: React.FC = () => {
   const steps = [
-    {
-      num: '01',
-      title: 'DISCOVER',
-      icon: <Search className="w-4 h-4" />,
-      desc: 'Understand business goals, target audience, market landscape, and budget.'
-    },
-    {
-      num: '02',
-      title: 'STRATEGIZE',
-      icon: <Compass className="w-4 h-4" />,
-      desc: 'Craft an integrated marketing mix combining digital performance and outdoor media.'
-    },
-    {
-      num: '03',
-      title: 'CREATE',
-      icon: <PenTool className="w-4 h-4" />,
-      desc: 'Develop high-converting brand assets, video content, websites, and signage.'
-    },
-    {
-      num: '04',
-      title: 'LAUNCH',
-      icon: <Rocket className="w-4 h-4" />,
-      desc: 'Deploy campaigns across Meta, Google, SEO, and street-level hoarding inventory.'
-    },
-    {
-      num: '05',
-      title: 'MEASURE',
-      icon: <BarChart3 className="w-4 h-4" />,
-      desc: 'Track clear business metrics: qualified leads, sales conversions, and ROI.'
-    },
-    {
-      num: '06',
-      title: 'OPTIMIZE',
-      icon: <RefreshCw className="w-4 h-4" />,
-      desc: 'Analyze performance data, refine ad targeting, and scale top-performing channels.'
-    }
+    { num: '01', icon: Search,    title: 'DISCOVER',   desc: 'Understand business goals, target audience, market landscape, and budget.' },
+    { num: '02', icon: Compass,   title: 'STRATEGIZE', desc: 'Craft an integrated marketing mix combining digital performance and outdoor media.' },
+    { num: '03', icon: PenTool,   title: 'CREATE',     desc: 'Develop high-converting brand assets, video content, websites, and signage.' },
+    { num: '04', icon: Rocket,    title: 'LAUNCH',     desc: 'Deploy campaigns across Meta, Google, SEO, and street-level hoarding inventory.' },
+    { num: '05', icon: BarChart3, title: 'MEASURE',    desc: 'Track clear business metrics: qualified leads, sales conversions, and ROI.' },
+    { num: '06', icon: RefreshCw, title: 'OPTIMIZE',   desc: 'Analyze performance data, refine ad targeting, and scale top-performing channels.' },
   ];
 
   return (
@@ -47,14 +17,17 @@ export const WhatWeDoProcess: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="red-badge mb-3">
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Structured Methodology</span>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="h-px w-8 bg-red-600/50" aria-hidden="true" />
+            <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+              Structured Methodology
+            </span>
+            <span className="h-px w-8 bg-red-600/50" aria-hidden="true" />
           </div>
           <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-white">
             How We Work: <span className="gradient-text-red">6-Step Growth System</span>
           </h2>
-          <p className="mt-2 text-zinc-400 text-xs sm:text-sm">
+          <p className="mt-2 text-zinc-400 text-sm">
             Strategy, execution, and accountability connected end-to-end.
           </p>
         </div>
@@ -82,23 +55,26 @@ export const WhatWeDoProcess: React.FC = () => {
         {/* 6 Step Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {steps.map((step, idx) => (
-            <div key={idx} className="card-base p-5 relative">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center">
-                  {step.icon}
-                </div>
-                <span className="font-heading font-bold text-xl text-zinc-600">{step.num}</span>
+            <div key={idx} className="card-base p-5 relative group hover:border-red-500/30 transition-colors">
+              {/* Large typographic number — architectural, not AI */}
+              <span className="font-heading font-extrabold text-5xl text-white/[0.04] select-none absolute top-3 right-4 leading-none">
+                {step.num}
+              </span>
+
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className="w-8 h-8 rounded-lg bg-red-600/10 border border-red-500/20 text-red-500 flex items-center justify-center group-hover:bg-red-600/20 transition-colors">
+                  <step.icon className="w-4 h-4" strokeWidth={1.75} aria-hidden="true" />
+                </span>
+                <span className="text-[10px] font-bold text-red-500/80 uppercase tracking-[0.18em]">
+                  Step {step.num}
+                </span>
               </div>
 
-              <div className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-0.5">
-                Step {step.num}
-              </div>
-
-              <h3 className="font-heading font-bold text-base text-white mb-1.5">
+              <h3 className="font-heading font-bold text-base text-white mb-2">
                 {step.title}
               </h3>
 
-              <p className="text-xs text-zinc-400 leading-relaxed">
+              <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
                 {step.desc}
               </p>
             </div>

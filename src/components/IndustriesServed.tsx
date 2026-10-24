@@ -1,36 +1,52 @@
 import React from 'react';
-import { Building2, ShoppingBag, Box, Activity, GraduationCap, Utensils, Car, ShoppingCart, Cpu, Briefcase, Wrench, Rocket } from 'lucide-react';
+import {
+  Building,
+  ShoppingBag,
+  Package,
+  HeartPulse,
+  GraduationCap,
+  UtensilsCrossed,
+  Car,
+  ShoppingCart,
+  Cpu,
+  Briefcase,
+  Wrench,
+  Rocket,
+} from 'lucide-react';
 
 export const IndustriesServed: React.FC = () => {
   const industries = [
-    { name: 'REAL ESTATE', icon: <Building2 className="w-4 h-4" />, desc: 'Property launches & outdoor hoardings' },
-    { name: 'RETAIL & FASHION', icon: <ShoppingBag className="w-4 h-4" />, desc: 'Store footfall & shop fascias' },
-    { name: 'FMCG BRANDS', icon: <Box className="w-4 h-4" />, desc: 'Mass reach outdoor & brand campaigns' },
-    { name: 'HEALTHCARE', icon: <Activity className="w-4 h-4" />, desc: 'Patient trust & local SEO' },
-    { name: 'EDUCATION', icon: <GraduationCap className="w-4 h-4" />, desc: 'Admissions & social lead generation' },
-    { name: 'HOSPITALITY', icon: <Utensils className="w-4 h-4" />, desc: 'Restaurant branding & UGC video' },
-    { name: 'AUTOMOTIVE', icon: <Car className="w-4 h-4" />, desc: 'Showroom branding & digital funnels' },
-    { name: 'E-COMMERCE', icon: <ShoppingCart className="w-4 h-4" />, desc: 'Meta/Google Ads & landing pages' },
-    { name: 'TECHNOLOGY', icon: <Cpu className="w-4 h-4" />, desc: 'B2B lead gen & positioning' },
-    { name: 'CORPORATE', icon: <Briefcase className="w-4 h-4" />, desc: 'Corporate identity & PR' },
-    { name: 'SERVICES', icon: <Wrench className="w-4 h-4" />, desc: 'Local search & customer acquisition' },
-    { name: 'STARTUPS & SMEs', icon: <Rocket className="w-4 h-4" />, desc: 'Brand foundation & MVP launch' }
+    { icon: Building, name: 'Real Estate', desc: 'Property launches & outdoor hoardings' },
+    { icon: ShoppingBag, name: 'Retail & Fashion', desc: 'Store footfall & shop fascias' },
+    { icon: Package, name: 'FMCG Brands', desc: 'Mass reach outdoor & brand campaigns' },
+    { icon: HeartPulse, name: 'Healthcare', desc: 'Patient trust & local SEO' },
+    { icon: GraduationCap, name: 'Education', desc: 'Admissions & social lead generation' },
+    { icon: UtensilsCrossed, name: 'Hospitality', desc: 'Restaurant branding & UGC video' },
+    { icon: Car, name: 'Automotive', desc: 'Showroom branding & digital funnels' },
+    { icon: ShoppingCart, name: 'E-Commerce', desc: 'Meta/Google Ads & landing pages' },
+    { icon: Cpu, name: 'Technology', desc: 'B2B lead gen & positioning' },
+    { icon: Briefcase, name: 'Corporate', desc: 'Corporate identity & PR' },
+    { icon: Wrench, name: 'Services', desc: 'Local search & customer acquisition' },
+    { icon: Rocket, name: 'Startups & SMEs', desc: 'Brand foundation & MVP launch' },
   ];
 
   return (
     <section id="industries" className="py-16 sm:py-20 section-veil relative border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
+
+        {/* Header — editorial overline, no pill */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="red-badge mb-3">
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>Target Verticals</span>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="h-px w-8 bg-red-600/50" aria-hidden="true" />
+            <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+              Target Verticals
+            </span>
+            <span className="h-px w-8 bg-red-600/50" aria-hidden="true" />
           </div>
           <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-white">
             Industries We <span className="gradient-text-red">Serve</span>
           </h2>
-          <p className="mt-2 text-zinc-400 text-xs sm:text-sm">
+          <p className="mt-2 text-zinc-400 text-sm">
             "The client's size or industry does not determine the solution. The business objective does."
           </p>
         </div>
@@ -38,15 +54,18 @@ export const IndustriesServed: React.FC = () => {
         {/* 4-Column Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {industries.map((ind, idx) => (
-            <div key={idx} className="card-base p-3.5 flex flex-col justify-between">
+            <div
+              key={idx}
+              className="card-base p-4 flex flex-col sm:flex-row items-start gap-3 group cursor-default"
+            >
+              <div className="shrink-0 w-9 h-9 rounded-lg bg-red-950/60 border border-red-500/20 flex items-center justify-center group-hover:bg-red-600/20 group-hover:border-red-500/40 transition-colors">
+                <ind.icon className="w-4 h-4 text-red-400 group-hover:text-red-300 transition-colors" strokeWidth={1.75} aria-hidden="true" />
+              </div>
               <div>
-                <div className="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center mb-2">
-                  {ind.icon}
-                </div>
-                <h3 className="font-heading font-bold text-xs text-white mb-0.5">
+                <h3 className="font-heading font-bold text-sm text-white mb-0.5 leading-snug">
                   {ind.name}
                 </h3>
-                <p className="text-[10px] text-zinc-400 leading-tight">
+                <p className="text-xs text-zinc-400 leading-snug">
                   {ind.desc}
                 </p>
               </div>

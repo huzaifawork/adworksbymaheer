@@ -18,19 +18,18 @@ export interface MenuItem {
 export const MENU_ITEMS: MenuItem[] = [
   { href: '#about', label: 'About Us', sub: 'Who we are' },
   { href: '#services', label: 'Services Ecosystem', sub: 'Four divisions' },
-  { href: '#hoardings', label: '150+ Outdoor Hoardings', sub: 'Owned OOH network', tag: 'OOH' },
+  { href: '#hoardings', label: '250+ Outdoor Hoardings', sub: 'Owned OOH network', tag: 'OOH' },
   { href: '#projects', label: 'Featured Projects', sub: 'Recent work' },
   { href: '#process', label: 'How We Work', sub: 'Six-step process' },
   { href: '#model', label: 'One-Stop Model', sub: 'A single partner' },
   { href: '#industries', label: 'Industries Served', sub: 'Sectors we know' },
-  { href: '#contact', label: 'Contact Us', sub: 'Start a project' },
+  { href: '#contact', label: 'Book a Strategy Call', sub: 'Start a project' },
 ];
 
 interface HoardingMenuProps {
   open: boolean;
   onClose: () => void;
   whatsappUrl: string;
-  whatsappDisplay: string;
   icon: React.ReactNode;
 }
 
@@ -40,7 +39,6 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
   open,
   onClose,
   whatsappUrl,
-  whatsappDisplay,
   icon,
 }) => {
   // Lock the page behind the menu and close on Escape
@@ -153,7 +151,7 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
             className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] py-3 text-[#062611] text-xs font-bold active:bg-[#1FBE5A] transition-colors"
           >
             {icon}
-            <span>WhatsApp {whatsappDisplay}</span>
+            <span>Chat on WhatsApp</span>
           </a>
 
           {/* gantry legs, to seat the stack on something */}

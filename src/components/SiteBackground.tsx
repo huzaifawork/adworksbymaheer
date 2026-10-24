@@ -1,25 +1,42 @@
 import React from 'react';
 
 /**
- * Fixed, full-viewport brand backdrop that stays put while the page scrolls.
- * Uses a position:fixed layer instead of background-attachment:fixed so it also
- * works on iOS Safari. Sits behind everything at -z-10 and never takes pointer events.
+ * Premium Luxury Agency Backdrop
+ * Replaces the blurry billboard collage with an ultra-clean, deep obsidian canvas
+ * featuring a sophisticated carmine-red radial spotlight and subtle architectural micro-grid.
  */
 export const SiteBackground: React.FC = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
-      
-      {/* Layer 1: the hoardings artwork, softened so its baked-in text reads as texture */}
-      <div className="site-bg-image" />
+      {/* Base Obsidian Tone */}
+      <div className="absolute inset-0 bg-[#070609]" />
 
-      {/* Layer 2: dark scrim keeping all foreground copy at full contrast */}
-      <div className="site-bg-scrim" />
+      {/* Elegant Carmine Red Ambient Spotlight from Top */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] opacity-70 pointer-events-none"
+        style={{
+          background: 'radial-gradient(50% 50% at 50% 0%, rgba(220, 38, 38, 0.18) 0%, rgba(185, 28, 28, 0.05) 50%, transparent 80%)',
+        }}
+      />
 
-      {/* Layer 3: brand red glow + corner vignette for depth */}
-      <div className="site-bg-glow" />
+      {/* Subtle Bottom Ambient Glow for depth */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] opacity-40 pointer-events-none"
+        style={{
+          background: 'radial-gradient(50% 50% at 50% 100%, rgba(220, 38, 38, 0.08) 0%, transparent 70%)',
+        }}
+      />
 
-      {/* Layer 4: fine grid to tie the backdrop to the rest of the UI */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-60" />
+      {/* Architectural Micro-Grid for subtle premium texture */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-25" />
+
+      {/* Corner Vignette for deep cinematic focus */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(5, 4, 6, 0.7) 100%)',
+        }}
+      />
     </div>
   );
 };

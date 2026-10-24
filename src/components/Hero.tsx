@@ -1,110 +1,114 @@
 import React from 'react';
-import { ArrowRight, Flame, ShieldCheck, Sparkles, Building2, TrendingUp, Compass } from 'lucide-react';
-import { HERO_SLOT_ID } from './BrandLogoDock';
-import { TrivisionHeadline } from './TrivisionHeadline';
+import { ArrowRight, MapPin, Layers, UserCheck, TrendingUp, type LucideIcon } from 'lucide-react';
 
-interface HeroProps {
-  onOpenModal: () => void;
-}
+const credentials: Array<{ icon: LucideIcon; label: string; value: string; title: string; desc: string }> = [
+  { icon: MapPin, label: 'OOH Assets', value: '250+', title: 'Owned Outdoor Media', desc: 'Major highway corridors & prime urban hubs nationwide' },
+  { icon: Layers, label: 'Capabilities', value: '360°', title: 'Unified Delivery', desc: 'Brand identity, digital ads, video shoots & retail signage' },
+  { icon: UserCheck, label: 'Partner Model', value: '1 Direct', title: 'Accountable Contact', desc: 'One point of contact, no broker markups or vendor chaos' },
+  { icon: TrendingUp, label: 'Client Growth', value: 'ROI First', title: 'Measurable Impact', desc: 'Accountable for qualified leads and sales growth' },
+];
 
-export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
+export const Hero: React.FC = () => {
   return (
-    <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 flex flex-col justify-center items-center overflow-hidden section-veil-hero border-b border-white/5">
-      
-      {/* Spotlight: gives the copy its own contrast so the backdrop's
-          billboard and mountains can stay bright around it */}
-      <div className="absolute inset-0 hero-spotlight pointer-events-none"></div>
+    <section className="relative border-b border-white/5">
 
-      {/* Warm red bloom lifted from the artwork's sunset */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[560px] h-[320px] bg-red-600/12 rounded-full blur-[110px] pointer-events-none"></div>
+      {/* ─── Billboard stage ─── */}
+      <div className="relative min-h-[92svh] lg:min-h-[86vh] flex items-end lg:items-center overflow-hidden">
+        {/* The billboard carries the brand mark, so the hero needs no separate logo.
+            The portrait crop matches the preload media queries in index.html. */}
+        <picture>
+          <source media="(max-aspect-ratio: 3/4)" srcSet="/bgimage/bgimage-portrait.webp" type="image/webp" />
+          <source srcSet="/bgimage/bgimage.webp" type="image/webp" />
+          <img
+            src="/bgimage/bgimage-portrait.jpg"
+            alt="Adworks by Maheer billboard lit at sunset above a mountain highway"
+            // React 18 doesn't know fetchPriority yet; pass the raw attribute.
+            {...{ fetchpriority: 'high' }}
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top] lg:object-[70%_center]"
+          />
+        </picture>
 
-      {/* Lower edge light-catch */}
-      <div className="absolute bottom-0 left-0 right-0 h-px hero-edge-glow pointer-events-none"></div>
-
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        
-        {/* Brand slot - reserves the big logo's box. The mark itself is the
-            single <BrandLogoDock/> element, which scales down and travels up
-            into the header as the page scrolls. */}
+        {/* Legibility: dark from the bottom on phones, from the left on desktop,
+            plus a light top band so the navbar reads over the sky. */}
         <div
-          id={HERO_SLOT_ID}
+          className="absolute inset-0 lg:hidden"
           aria-hidden="true"
-          className="mx-auto mb-7 w-[min(74vw,430px)] aspect-[313/76]"
+          style={{ background: 'linear-gradient(to bottom, rgba(7,6,9,0.55) 0%, rgba(7,6,9,0) 18%, rgba(7,6,9,0) 32%, rgba(7,6,9,0.72) 48%, rgba(7,6,9,0.94) 60%, #070609 78%)' }}
+        />
+        <div
+          className="absolute inset-0 hidden lg:block"
+          aria-hidden="true"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(7,6,9,0.94) 0%, rgba(7,6,9,0.82) 30%, rgba(7,6,9,0.25) 58%, rgba(7,6,9,0) 75%),' +
+              'linear-gradient(to bottom, rgba(7,6,9,0.6) 0%, rgba(7,6,9,0) 22%, rgba(7,6,9,0) 72%, #070609 100%)',
+          }}
         />
 
-        {/* Top Tagline Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-950/40 border border-red-500/30 text-red-400 text-[11px] font-semibold mb-6">
-          <Flame className="w-3.5 h-3.5 text-red-500" />
-          <span className="uppercase tracking-wider">360° Integrated Growth Agency</span>
-          <span className="w-1 h-1 rounded-full bg-red-500"></span>
-          <span className="text-zinc-300">Pakistan &amp; Beyond</span>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:py-32">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-500/70" aria-hidden="true" />
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+                360° Marketing &amp; Outdoor Media
+              </span>
+            </div>
+
+            <h1 className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-white mb-5">
+              One Agency.<br />
+              <span className="gradient-text-red">Every Channel.</span>
+            </h1>
+
+            <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed mb-8 max-w-lg">
+              Strategy, creative, performance ads, content and{' '}
+              <strong className="text-white font-semibold">250+ owned hoardings</strong> across Pakistan, run by one
+              accountable team.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="#contact"
+                className="w-full sm:w-auto btn-luxury-action inline-flex items-center justify-center gap-2.5 text-white font-semibold text-sm px-7 py-3.5 rounded-xl active:scale-[0.98] transition-all"
+              >
+                <span className="relative z-10">Book a Strategy Call</span>
+                <ArrowRight className="w-4 h-4 text-white/90 relative z-10" />
+              </a>
+
+              <a
+                href="#hoardings"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.12] backdrop-blur-sm text-zinc-100 hover:text-white font-semibold text-sm px-6 py-3.5 rounded-xl border border-white/15 hover:border-white/30 transition-all"
+              >
+                <span>Explore Our Hoardings</span>
+                <ArrowRight className="w-4 h-4 text-zinc-400" />
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* The headline is a trivision board - it turns between three
-            messages the way the client's own sites do. */}
-        <TrivisionHeadline />
-
-        {/* Clean Sub-headline */}
-        <p className="max-w-2xl mx-auto text-xs sm:text-sm text-zinc-300 font-normal mb-8 leading-relaxed">
-          <strong className="text-white font-semibold">One Partner. Every Marketing Need Delivered.</strong> We unite Strategy, Branding, Digital Ads, Content Creation, and <span className="text-red-400 font-semibold">150+ Owned Outdoor Hoardings</span> under one roof for sustainable brand growth.
-        </p>
-
-        {/* Action Button Group */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14">
-          <button
-            onClick={onOpenModal}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition shadow-lg shadow-red-950/50"
-          >
-            <Sparkles className="w-4 h-4 text-red-200" />
-            <span>Request Agency Proposal</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-
-          <a
-            href="#services"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-zinc-200 hover:text-white font-semibold text-xs sm:text-sm px-6 py-3.5 rounded-xl border border-white/10 transition"
-          >
-            <span>Explore 4 Ecosystem Divisions</span>
-          </a>
-        </div>
-
-        {/* 4 Feature Cards */}
+      {/* ─── Credibility strip ─── */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-20 pt-4 lg:pt-0 lg:-mt-10 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 text-left">
-          
-          <div className="card-base p-4">
-            <div className="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center mb-2.5">
-              <Building2 className="w-4 h-4" />
+          {credentials.map(({ icon: Icon, label, value, title, desc }) => (
+            <div
+              key={label}
+              className="card-base p-5 border border-white/5 bg-[#0D0B11]/90 hover:border-red-500/40 transition-all group"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-7 h-7 rounded-lg bg-red-600/10 border border-red-500/20 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600/20 transition-colors">
+                  <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+                </span>
+                <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-widest group-hover:text-red-400 transition-colors">
+                  {label}
+                </span>
+              </div>
+              <div className="font-heading font-extrabold text-2xl sm:text-3xl text-white">{value}</div>
+              <div className="text-xs font-semibold text-red-400 mt-1">{title}</div>
+              <p className="text-xs text-zinc-400 mt-1.5 leading-snug">{desc}</p>
             </div>
-            <div className="font-heading font-extrabold text-xl text-white">150+</div>
-            <p className="text-[11px] text-zinc-400 mt-0.5">Owned Outdoor Hoardings across Pakistan</p>
-          </div>
-
-          <div className="card-base p-4">
-            <div className="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center mb-2.5">
-              <Compass className="w-4 h-4" />
-            </div>
-            <div className="font-heading font-extrabold text-xl text-white">360°</div>
-            <p className="text-[11px] text-zinc-400 mt-0.5">Brand, Digital, Content & Outdoor Media</p>
-          </div>
-
-          <div className="card-base p-4">
-            <div className="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center mb-2.5">
-              <ShieldCheck className="w-4 h-4" />
-            </div>
-            <div className="font-heading font-extrabold text-xl text-white">1 Partner</div>
-            <p className="text-[11px] text-zinc-400 mt-0.5">Zero Vendor Fragmentation & Single Point Contact</p>
-          </div>
-
-          <div className="card-base p-4">
-            <div className="w-8 h-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center mb-2.5">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-            <div className="font-heading font-extrabold text-xl text-white">ROI First</div>
-            <p className="text-[11px] text-zinc-400 mt-0.5">Business Outcome Driven (Not just activity)</p>
-          </div>
-
+          ))}
         </div>
-
       </div>
     </section>
   );

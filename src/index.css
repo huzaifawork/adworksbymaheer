@@ -23,6 +23,8 @@
 /* Belongs on the scrolling root, not on every element */
 html {
   scroll-behavior: smooth;
+  /* Anchor jumps land below the fixed header instead of under it. */
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -87,7 +89,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .gradient-text-red {
-    background: linear-gradient(135deg, #FFFFFF 40%, #FF4D4D 75%, #E60000 100%);
+    /* Stays within the brand reds end to end. Starting from white made the
+       accent fade in mid-word, so short words read as half-highlighted. */
+    background: linear-gradient(100deg, #FF6A6A 0%, #FF3B3B 45%, #E60000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -98,6 +102,55 @@ h1, h2, h3, h4, h5, h6 {
       linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
+}
+
+/* Luxury Glint Animation for Primary Actions */
+@keyframes btnGlintSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  25%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes btnAmbientPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.4), 0 4px 14px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(220, 38, 38, 0.8), 0 4px 18px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.btn-luxury-action {
+  position: relative !important;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, #E50914 0%, #B91C1C 100%) !important;
+  animation: btnAmbientPulse 3.5s ease-in-out infinite !important;
+}
+
+.btn-luxury-action::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  animation: btnGlintSweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.btn-luxury-action:hover {
+  background: linear-gradient(135deg, #FF1A26 0%, #DC2626 100%) !important;
+  box-shadow: 0 0 35px rgba(239, 68, 68, 0.85), 0 6px 22px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* ============================================================
@@ -452,97 +505,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ============================================================
-   Illuminated signboards (ProjectsShowcase)
-   These are lightboxes, so the board strikes on rather than
-   fading in: the face stumbles twice before the gear holds,
-   the way a real discharge tube does.
-   ============================================================ */
-
-/* Two stumbles, then it holds - applied to the dark face, so the whole
-   board flickers to life rather than just a glow layer appearing. */
-@keyframes signFaceStrike {
-  0%   { opacity: 0.68; }
-  16%  { opacity: 0.06; }
-  25%  { opacity: 0.6; }
-  38%  { opacity: 0.03; }
-  47%  { opacity: 0.42; }
-  62%  { opacity: 0; }
-  100% { opacity: 0; }
+/* Swipe galleries: keep the scrolling, hide the bar */
+.no-scrollbar {
+  scrollbar-width: none;
 }
-
-@keyframes signGlowStrike {
-  0%   { opacity: 0; }
-  16%  { opacity: 0.9; }
-  25%  { opacity: 0.12; }
-  38%  { opacity: 0.95; }
-  47%  { opacity: 0.3; }
-  62%  { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-/* Unlit: the photograph sits behind a dark face, tubes cold. */
-.sign-dim {
-  background-color: #06050A;
-  opacity: 0.68;
-}
-
-.sign-glow {
-  opacity: 0;
-  /* Light coming from inside the box, strongest across the sign itself. */
-  background:
-    radial-gradient(70% 55% at 50% 42%, rgba(255, 238, 220, 0.20) 0%, rgba(255, 150, 110, 0.07) 45%, transparent 78%),
-    radial-gradient(90% 70% at 50% 100%, rgba(230, 0, 0, 0.16) 0%, transparent 70%);
-}
-
-.sign-tag {
-  color: #71717A; /* zinc-500: unpowered */
-  transition: color 420ms ease-out, text-shadow 420ms ease-out;
-}
-
-/* Powered. */
-.signboard[data-lit] .sign-dim {
-  animation: signFaceStrike 760ms steps(1, end) forwards;
-}
-
-.signboard[data-lit] .sign-glow {
-  animation: signGlowStrike 760ms steps(1, end) forwards;
-}
-
-.signboard[data-lit] .sign-tag {
-  color: #F87171; /* red-400 */
-  text-shadow: 0 0 10px rgba(248, 113, 113, 0.55);
-  transition-delay: 460ms;
-}
-
-/* Light spilling out of the box onto the wall behind it. */
-.signboard {
-  transition: box-shadow 520ms ease-out, border-color 250ms ease-in-out;
-}
-
-.signboard[data-lit] {
-  box-shadow: 0 10px 34px -14px rgba(230, 0, 0, 0.34);
-  transition-delay: 460ms;
-}
-
-/* Standing closer to a lit sign. */
-.signboard[data-lit]:hover {
-  box-shadow: 0 12px 44px -12px rgba(230, 0, 0, 0.52);
-  transition-delay: 0ms;
-}
-
-/* No flicker: the boards are simply already on. */
-@media (prefers-reduced-motion: reduce) {
-  .signboard[data-lit] .sign-dim {
-    animation: none;
-    opacity: 0;
-  }
-  .signboard[data-lit] .sign-glow {
-    animation: none;
-    opacity: 1;
-  }
-  .signboard[data-lit] .sign-tag,
-  .signboard[data-lit] {
-    transition-delay: 0ms;
-  }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
