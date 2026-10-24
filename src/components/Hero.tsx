@@ -48,16 +48,19 @@ export const Hero: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:py-32">
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="h-px w-8 bg-red-500/70" aria-hidden="true" />
-              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
-                360° Marketing &amp; Outdoor Media
+            {/* The eyebrow is part of the h1 so the page's main heading names
+                what the business is and where, not just the slogan. */}
+            <h1 className="text-white mb-5">
+              <span className="flex items-center gap-3 mb-5">
+                <span className="h-px w-8 shrink-0 bg-red-500/70" aria-hidden="true" />
+                <span className="font-body text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+                  Marketing &amp; Billboard Agency in Pakistan
+                </span>
+              </span>{' '}
+              <span className="block font-heading font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1.05]">
+                One Agency.{' '}<br />
+                <span className="gradient-text-red">Every Channel.</span>
               </span>
-            </div>
-
-            <h1 className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-white mb-5">
-              One Agency.<br />
-              <span className="gradient-text-red">Every Channel.</span>
             </h1>
 
             <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed mb-8 max-w-lg">

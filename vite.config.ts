@@ -49,7 +49,7 @@ function vercelApiDev(): Plugin {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), vercelApiDev()],
   server: {
     port: 3000,
@@ -64,7 +64,9 @@ export default defineConfig({
     sourcemap: false,
     // Inline anything under 4 kB rather than paying a round trip for it.
     assetsInlineLimit: 4096,
-    rollupOptions: {
+    // The SSR pass (prerendering) leaves React external, so the chunk split
+    // only applies to the browser build.
+    rollupOptions: isSsrBuild ? {} : {
       output: {
         // Keep React in its own long-lived chunk: it changes far less often
         // than the site's own markup, so repeat visitors keep it cached
@@ -75,4 +77,4 @@ export default defineConfig({
       }
     }
   }
-});
+}));

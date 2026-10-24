@@ -95,7 +95,8 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
-          <div>
+          {/* Year is baked in at build time; the browser may disagree across New Year. */}
+          <div suppressHydrationWarning>
             © {new Date().getFullYear()} ADWORKS BY MAHEER. All rights reserved.
           </div>
 

@@ -5,30 +5,88 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adworks by Maheer | 360° Marketing & Outdoor Solutions</title>
-    <meta name="description" content="Your One-Stop Marketing Solution. Adworks by Maheer brings Strategy, Creative, Digital Performance, Content Creation, and 250+ Owned Outdoor Hoarding inventory together under one roof." />
-    <meta name="keywords" content="Marketing Agency, 360 Marketing Pakistan, Outdoor Hoardings, Billboards, Digital Marketing, Meta Ads, Google Ads, Branding, Content Creation, Adworks by Maheer" />
+    <title>Adworks by Maheer | Marketing &amp; Billboard Agency in Pakistan</title>
+    <meta name="description" content="Marketing agency in Pakistan with 250+ owned billboards: brand strategy, Meta &amp; Google Ads, content, 3D signage and outdoor media, run by one team." />
     <meta name="theme-color" content="#080708" />
     <link rel="canonical" href="https://www.adworksbymaheer.com/" />
 
     <!-- OpenGraph SEO. Crawlers do not resolve relative URLs, so the image
          must be absolute or link previews show up blank. -->
     <meta property="og:site_name" content="Adworks by Maheer" />
-    <meta property="og:title" content="Adworks by Maheer | 360° Marketing & Growth Solutions" />
-    <meta property="og:description" content="Your One-Stop Marketing Solution. Integrated Strategy, Branding, Performance Marketing, and 250+ Outdoor Hoardings." />
+    <meta property="og:title" content="Adworks by Maheer | Marketing &amp; Billboard Agency in Pakistan" />
+    <meta property="og:description" content="Marketing agency in Pakistan with 250+ owned billboards: brand strategy, Meta &amp; Google Ads, content, 3D signage and outdoor media, run by one team." />
     <meta property="og:url" content="https://www.adworksbymaheer.com/" />
     <meta property="og:image" content="https://www.adworksbymaheer.com/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_PK" />
+    <meta property="og:image:alt" content="Adworks by Maheer: One Agency. Every Channel." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Adworks by Maheer | 360° Marketing & Growth Solutions" />
-    <meta name="twitter:description" content="Integrated Strategy, Branding, Performance Marketing, and 250+ Owned Outdoor Hoardings across Pakistan." />
+    <meta name="twitter:title" content="Adworks by Maheer | Marketing &amp; Billboard Agency in Pakistan" />
+    <meta name="twitter:description" content="Marketing agency in Pakistan with 250+ owned billboards: brand strategy, Meta &amp; Google Ads, content, 3D signage and outdoor media, run by one team." />
     <meta name="twitter:image" content="https://www.adworksbymaheer.com/og-image.jpg" />
 
-    <!-- The backdrop is the first thing painted behind the hero; start it
-         before the CSS that references it has even been parsed. -->
+    <!-- Structured data: tells search engines who the business is. Contact
+         details mirror src/lib/contact.ts - keep the two in step. No street
+         address yet, so this is an Organization rather than a LocalBusiness. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.adworksbymaheer.com/#organization",
+          "name": "Adworks by Maheer",
+          "url": "https://www.adworksbymaheer.com/",
+          "logo": "https://www.adworksbymaheer.com/icon-512.png",
+          "image": "https://www.adworksbymaheer.com/og-image.jpg",
+          "description": "Marketing and billboard agency in Pakistan with 250+ owned outdoor hoardings, offering brand strategy, digital performance advertising, content and website production, and outdoor and physical media.",
+          "email": "adworksbymaheer@gmail.com",
+          "telephone": "+92-317-7272777",
+          "founder": { "@type": "Person", "name": "Maheer", "jobTitle": "Founder & Managing Director" },
+          "areaServed": { "@type": "Country", "name": "Pakistan" },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+92-317-7272777",
+            "email": "adworksbymaheer@gmail.com",
+            "contactType": "sales",
+            "areaServed": "PK"
+          },
+          "sameAs": [
+            "https://www.instagram.com/adworksbymaheer/",
+            "https://www.facebook.com/profile.php?id=61590609124976",
+            "https://www.tiktok.com/@adworksbymaheer"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Marketing and advertising services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand strategy and creative design" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta and Google Ads performance marketing" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content, video and website production" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Billboard and outdoor advertising (250+ owned hoardings)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "3D signage and illuminated signboards" } }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.adworksbymaheer.com/#website",
+          "url": "https://www.adworksbymaheer.com/",
+          "name": "Adworks by Maheer",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://www.adworksbymaheer.com/#organization" }
+        }
+      ]
+    }
+    </script>
+
+    <!-- The hero billboard is the largest thing on first paint (LCP); start
+         fetching the right crop before anything else. Media queries match
+         the <picture> sources in Hero.tsx. -->
     <link rel="preload" as="image" href="/bgimage/bgimage.webp" type="image/webp" media="(min-aspect-ratio: 3/4)" />
     <link rel="preload" as="image" href="/bgimage/bgimage-portrait.webp" type="image/webp" media="(max-aspect-ratio: 3/4)" />
 

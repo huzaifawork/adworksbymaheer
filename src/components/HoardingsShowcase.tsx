@@ -107,7 +107,7 @@ export const HoardingsShowcase: React.FC = () => {
               <span className="h-px w-8 bg-red-500/60" aria-hidden="true" />
             </div>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
-              250+ Owned Outdoor<br />
+              250+ Owned Outdoor{' '}<br />
               <span className="gradient-text-red">Hoardings Network</span>
             </h2>
             <p className="mt-4 text-zinc-400 text-sm leading-relaxed max-w-lg">
