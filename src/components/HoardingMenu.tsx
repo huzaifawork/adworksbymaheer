@@ -107,7 +107,7 @@ export const HoardingMenu: React.FC<HoardingMenuProps> = ({
               {/* warm spill from the lamps above */}
               <span className="panel-spill pointer-events-none absolute inset-x-0 top-0 h-1/2" aria-hidden="true" />
 
-              <span className="relative flex items-center gap-3 px-3.5 py-3">
+              <span className="relative flex items-center gap-3 px-3.5 py-2.5">
                 {/* site code, the way hoarding inventory is numbered */}
                 <span className="shrink-0 w-8 text-[10px] font-bold tabular-nums text-red-500/90 tracking-widest">
                   {String(i + 1).padStart(2, '0')}

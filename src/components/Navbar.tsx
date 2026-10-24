@@ -495,14 +495,15 @@ export const Navbar: React.FC = () => {
 
           </div>
 
-          {/* Mobile Right Controls: WhatsApp shortcut + Hamburger */}
+          {/* Mobile Right Controls: WhatsApp shortcut + Hamburger. The shortcut
+              hides while the menu is open, which has its own WhatsApp button. */}
           <div className="xl:hidden flex items-center gap-2">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat on WhatsApp"
-              className="inline-flex items-center gap-1.5 h-10 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 rounded-lg text-xs font-bold"
+              className={`${mobileMenuOpen ? 'hidden' : 'inline-flex'} items-center gap-1.5 h-10 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 rounded-lg text-xs font-bold`}
             >
               <WhatsAppIcon className="w-4 h-4" />
               <span className="text-xs">Chat</span>
