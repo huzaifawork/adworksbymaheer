@@ -59,16 +59,10 @@ export const AboutDirector: React.FC = () => {
                       <p className="text-red-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
                         Founder &amp; Managing Director
                       </p>
-                      <span className="text-xs text-zinc-400 block mt-0.5">
-                        Adworks Integrated Media Group
-                      </span>
                     </div>
 
                     <div className="text-right">
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">
-                        EST. KARACHI
-                      </span>
-                      <span className="text-[10px] text-red-500 font-semibold block mt-0.5">
+                      <span className="text-[10px] text-red-500 font-semibold block">
                         Executive Desk
                       </span>
                     </div>
