@@ -21,7 +21,7 @@ export const AboutDirector: React.FC = () => {
             One Partner. <span className="gradient-text-red">Full Accountability.</span>
           </h2>
           <p className="mt-2 text-zinc-400 text-sm">
-            Brand strategy, digital performance and nationwide outdoor media, led by one team.
+            Brand strategy, digital performance and nationwide outdoor media, led by one team with a global vision.
           </p>
         </div>
 
@@ -51,21 +51,13 @@ export const AboutDirector: React.FC = () => {
 
                 {/* Director ID Plate */}
                 <div className="absolute bottom-3 left-3 right-3 p-3.5 bg-[#09080C]/90 backdrop-blur-md rounded-xl border border-white/10">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-heading font-extrabold text-base text-white tracking-tight">
-                        Maheer
-                      </h3>
-                      <p className="text-red-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
-                        Founder &amp; Managing Director
-                      </p>
-                    </div>
-
-                    <div className="text-right">
-                      <span className="text-[10px] text-red-500 font-semibold block">
-                        Executive Desk
-                      </span>
-                    </div>
+                  <div>
+                    <h3 className="font-heading font-extrabold text-base text-white tracking-tight">
+                      Maheer
+                    </h3>
+                    <p className="text-red-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
+                      Founder &amp; Managing Director
+                    </p>
                   </div>
                 </div>
 
@@ -89,6 +81,10 @@ export const AboutDirector: React.FC = () => {
 
             <p className="text-zinc-400 text-sm leading-relaxed">
               We start with your numbers: the economics of your business and the targets that matter. Then we choose the right mix of digital and outdoor channels, and we stay accountable for the results.
+            </p>
+
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Rooted in Pakistan, we are building for a global stage: taking the brands we grow to new markets and partnering with businesses around the world.
             </p>
 
             {/* 3 Executive Commitments (Architectural Numbering - No Toy Icon Boxes) */}
